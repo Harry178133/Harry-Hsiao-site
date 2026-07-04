@@ -7,4 +7,5 @@
 3. Go to Settings → Pages.
 4. Deploy from the `main` branch and `/root`.
 5. Your website will be live in a few minutes.
+6. https://agent-kb-api.alan-chen75.workers.dev/mcp/sse?token=mcp_e501b768ceb54562b3a090b578a813b0
 
