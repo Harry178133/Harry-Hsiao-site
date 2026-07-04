@@ -3,298 +3,538 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harry Hsiao | 永續顧問 · 系統思考 · AI 轉型</title>
+    <title>蕭聖霖 Harry Hsiao | 永續顧問 · 跨國稅務合規 · 系統思考</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gogoro: {
+                            green: '#00d1b2',
+                            black: '#0f1011',
+                            darkGray: '#1d1d1f',
+                            lightGray: '#f5f5f7',
+                            border: '#e8e8ed'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         :root {
-            --apple-bg: #f5f5f7;
-            --apple-text: #1d1d1f;
-            --apple-green: #00d1b2;
-            --apple-blue: #0071e3;
+            --gogoro-green: #00d1b2;
+            --gogoro-black: #0f1011;
         }
         body {
             font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
             background-color: #ffffff;
-            color: var(--apple-text);
+            color: var(--gogoro-black);
             overflow-x: hidden;
         }
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.75);
+        /* Gogoro風格半透明導航列 */
+        .gogoro-nav {
+            background: rgba(15, 16, 17, 0.85);
             backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        .bento-card {
-            border-radius: 32px;
-            overflow: hidden;
-            background: var(--apple-bg);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 藥丸形按鈕 */
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .bento-card:hover {
-            transform: scale(1.01);
+        /* Gogoro 特有的大數字底色與微調 */
+        .gogoro-num-shadow {
+            text-shadow: 0 4px 20px rgba(0, 209, 178, 0.15);
         }
-        .gradient-text {
-            background: linear-gradient(90deg, #1d1d1f, #6e6e73);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        /* 模仿 Apple 官網的高級漸層邊框 */
-        .pro-border {
-            position: relative;
-            background: #fff;
-            z-index: 0;
-        }
-        .pro-border::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, #00d1b2, #0071e3, #8e44ad);
-            z-index: -1;
-            border-radius: 34px;
-            opacity: 0.3;
-        }
+        /* Canvas 背景樣式 */
         #system-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.4;
+            z-index: 0;
+            opacity: 0.65;
+            pointer-events: none;
+        }
+        /* 滾動條美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f1011;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333335;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d1b2;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-white text-gogoro-black">
 
-    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-gray-100">
-        <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
-            <a href="#" class="text-lg font-semibold tracking-tight">Harry Hsiao</a>
-            <div class="hidden md:flex space-x-8 text-[13px] font-medium text-gray-600">
-                <a href="#about" class="hover:text-black transition">關於我</a>
-                <a href="#expertise" class="hover:text-black transition">專業核心</a>
-                <a href="#insights" class="hover:text-black transition">創新洞察</a>
+    <!-- 導航列 -->
+    <nav class="fixed top-0 w-full z-50 gogoro-nav transition-all duration-300">
+        <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-white text-lg font-bold tracking-tight flex items-center gap-2">
+                <span>蕭聖霖 Harry Hsiao</span>
+                <span class="text-xs bg-gogoro-green/20 text-gogoro-green px-2 py-0.5 rounded font-normal">Crowe TW 經理</span>
+            </a>
+            <div class="hidden md:flex space-x-10 text-[13px] font-medium text-gray-400">
+                <a href="#about" class="hover:text-white transition-colors duration-200">關於我</a>
+                <a href="#impact" class="hover:text-white transition-colors duration-200">實績指標</a>
+                <a href="#experience" class="hover:text-white transition-colors duration-200">專業經歷</a>
+                <a href="#education" class="hover:text-white transition-colors duration-200">學歷 & 聯絡</a>
             </div>
-            <button onclick="document.getElementById('contact').scrollIntoView()" class="bg-black text-white text-[12px] px-4 py-1.5 rounded-full hover:bg-gray-800 transition">聯絡顧問</button>
+            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="bg-gogoro-green text-gogoro-black hover:bg-[#02b399] btn-pill !py-2 !px-4 text-xs font-semibold">
+                聯絡顧問
+            </button>
         </div>
     </nav>
 
-    <section class="relative min-h-[90vh] flex items-center justify-center pt-20 px-6 overflow-hidden">
+    <!-- 首頁滿版大視覺區塊 -->
+    <section class="relative min-h-screen bg-gogoro-black flex items-center justify-center pt-16 px-6 overflow-hidden">
+        <!-- Canvas 背景粒子 -->
         <canvas id="system-canvas"></canvas>
-        <div class="max-w-4xl text-center reveal" id="hero-trigger">
-            <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
-                用系統思維驅動永續，<br>
-                <span class="gradient-text">用 AI 科技放大影響力。</span>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-gogoro-black/50 to-gogoro-black z-0"></div>
+        
+        <div class="max-w-5xl text-center relative z-10 reveal" id="hero-trigger">
+            <span class="text-gogoro-green text-xs md:text-sm font-semibold tracking-[0.25em] uppercase mb-4 block">SUSTAINABILITY · SYSTEM THINKING · TAX COMPLIANCE</span>
+            <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-white mb-8 leading-[1.2] font-sans break-keep">
+                <span class="inline-block">用系統思維驅動永續，</span>
+                <span class="text-gogoro-green inline-block">用專業合規放大影響力。</span>
             </h1>
-            <p class="text-lg md:text-2xl text-gray-500 font-light max-w-3xl mx-auto leading-relaxed">
-                我是 Harry Hsiao。一名專注於 ESG 策略、國際揭露準則與數位轉型的永續顧問。我協助企業在複雜的法規浪潮中，找到清晰的綠色轉型路徑。
+            <p class="text-base md:text-lg lg:text-xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed">
+                我是蕭聖霖 Harry Hsiao，現任國富浩華 (Crowe TW) 永續發展部門經理。專注於 ESG 策略輔導、溫室氣體盤查、SROI 社會價值評估與跨國移轉訂價規劃，為企業建構穩健的綠色與稅務合規雙路徑。
             </p>
-            <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
-                <a href="#expertise" class="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition">探索專業支柱</a>
-                <a href="#insights" class="w-full md:w-auto text-blue-600 font-medium hover:underline px-8 py-3">查看實戰案例 →</a>
+            <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
+                <a href="#impact" class="w-full sm:w-auto bg-gogoro-green text-gogoro-black hover:bg-[#02b399] btn-pill text-base">探索實績數據</a>
+                <a href="#experience" class="w-full sm:w-auto text-white border border-white/30 hover:border-white hover:bg-white/5 btn-pill text-base">查看專業經歷 →</a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 px-6 bg-white">
+    <!-- 關於我極簡大圖文區塊 -->
+    <section id="about" class="py-32 px-6 bg-white border-b border-gogoro-border">
         <div class="max-w-[1200px] mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 永續顧問：現代專業背景 -->
-                <div class="bento-card p-10 flex flex-col justify-between relative group min-h-[320px] reveal">
-                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=800" 
-                         class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" alt="Sustainability Office">
-                    <div class="absolute inset-0 bg-gradient-to-br from-white/80 via-white/40 to-transparent z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
-                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">永續顧問與管理者</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm">中山大學財管系與會計師事務所背景，現任永續部門主管。擅長將複雜法規轉化為企業落地的永續 DNA。</p>
-                    </div>
-                </div>
-
-                <!-- 系統思考者：幾何線條背景 -->
-                <div class="bento-card p-10 flex flex-col justify-between relative group min-h-[320px] reveal">
-                    <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80&w=800" 
-                         class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" alt="Geometric Architecture">
-                    <div class="absolute inset-0 bg-gradient-to-br from-white/80 via-white/40 to-transparent z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">系統思考者</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm">著迷於麥肯錫、BCG 策略模型與 OGSM。我相信無論是治理還是個人成長，都能透過系統思維找到最優解。</p>
-                    </div>
-                </div>
-
-                <!-- 大自然愛好者：山脈景致背景 -->
-                <div class="bento-card p-10 flex flex-col justify-between relative group min-h-[320px] reveal">
-                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800" 
-                         class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" alt="Mountain Range">
-                    <div class="absolute inset-0 bg-gradient-to-br from-white/80 via-white/40 to-transparent z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
-                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3L2 12h3v8h14v-8h3L12 3z"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">大自然愛好者</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm">工作之外，我是一名登山客。高山上的生態平衡經常帶給我關於永續與環境共生的全新啟發。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 信念區塊 -->
-            <div class="mt-24 text-center max-w-3xl mx-auto reveal">
-                <span class="text-sm font-bold tracking-widest text-emerald-600 uppercase">My Belief</span>
-                <h2 class="text-3xl md:text-5xl font-bold mt-6 leading-tight">「永續不是一個終點，而是一個持續優化的動態系統。」</h2>
-                <p class="text-xl text-gray-400 mt-6 font-light">而技術（AI），是加速這個系統運轉的最佳催化劑。</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="expertise" class="py-32 px-6 bg-[#1d1d1f] text-white overflow-hidden">
-        <div class="max-w-[1200px] mx-auto">
-            <div class="mb-20 reveal">
-                <h2 class="text-4xl md:text-6xl font-bold tracking-tight">專業核心。</h2>
-                <p class="text-xl text-gray-400 mt-4">Expertise & Methodologies</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- 核心 1 -->
-                <div class="pro-border p-10 rounded-[32px] reveal">
-                    <div class="text-emerald-400 mb-6">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-black">國際永續標準與合規</h3>
-                    <ul class="space-y-3 text-gray-500 text-sm">
-                        <li class="flex items-start"><span class="mr-2">·</span> 精通 GRI, SASB, TCFD, IFRS S1/S2</li>
-                        <li class="flex items-start"><span class="mr-2">·</span> 永續報告書策略與供應鏈碳管理</li>
-                    </ul>
-                </div>
-
-                <!-- 核心 2 -->
-                <div class="pro-border p-10 rounded-[32px] reveal">
-                    <div class="text-blue-400 mb-6">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-black">策略引導與組織管理</h3>
-                    <ul class="space-y-3 text-gray-500 text-sm">
-                        <li class="flex items-start"><span class="mr-2">·</span> 運用 OGSM 進行目標追蹤</li>
-                        <li class="flex items-start"><span class="mr-2">·</span> 專業教練 (Coaching) 引導跨部門共識</li>
-                    </ul>
-                </div>
-
-                <!-- 核心 3 -->
-                <div class="pro-border p-10 rounded-[32px] reveal">
-                    <div class="text-purple-400 mb-6">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-black">AI 導入與知識管理</h3>
-                    <ul class="space-y-3 text-gray-500 text-sm">
-                        <li class="flex items-start"><span class="mr-2">·</span> LLM 諮詢工作流優化與知識庫管理</li>
-                        <li class="flex items-start"><span class="mr-2">·</span> 自研 Gemini GRI 諮詢 LINE Bot</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="insights" class="py-32 px-6">
-        <div class="max-w-[1200px] mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold mb-16 reveal">創新與洞察。</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- 專案展示 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Selected Projects</h4>
-                    <div class="space-y-8">
-                        <div class="group cursor-pointer">
-                            <h3 class="text-xl font-bold group-hover:text-blue-600 transition">上市櫃企業 ESG 輔導實績</h3>
-                            <p class="text-gray-500 text-sm mt-2">涵蓋電子業、化學製造業等關鍵領域之永續策略落地。</p>
-                        </div>
-                        <div class="h-px bg-gray-100"></div>
-                        <div class="group cursor-pointer">
-                            <h3 class="text-xl font-bold group-hover:text-blue-600 transition">AI 永續助理實驗室</h3>
-                            <p class="text-gray-500 text-sm mt-2">將 Logitech 工作流與 AI 自動化整合至日常諮詢流程中。</p>
-                        </div>
-                    </div>
+                    <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">ABOUT HARRY</span>
+                    <h2 class="text-4xl md:text-6xl font-bold mt-4 mb-8 tracking-tight leading-tight">整合財務、永續與稅務的系統思考者</h2>
+                    <p class="text-gray-600 text-lg font-light leading-relaxed mb-6">
+                        擁有國立中山大學財務管理學士背景，並深耕會計師事務所多年。我將複雜的法規要求與商業邏輯，整合進企業的動態系統中，從重大議題辨識、溫室氣體盤查確信到移轉訂價規劃，協助企業找到合規且高效的最佳解。
+                    </p>
+                    <p class="text-gray-600 text-lg font-light leading-relaxed">
+                        工作之外，我是一名熱愛大自然的登山客。置身高山的生態系統中，更深刻體會到人與自然和諧共生的必要性，這也是我投入永續發展與綠色轉型的初衷與熱情來源。
+                    </p>
                 </div>
-
-                <!-- 專欄預留 -->
-                <div class="bento-card p-10 bg-gray-50 reveal">
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Expert Perspectives</h4>
-                    <div class="space-y-6">
-                        <div class="p-6 bg-white rounded-2xl shadow-sm">
-                            <span class="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full font-bold">IFRS TREND</span>
-                            <h4 class="font-bold mt-2">解構 IFRS S1/S2 對台股企業的實質影響</h4>
-                        </div>
-                        <div class="p-6 bg-white rounded-2xl shadow-sm">
-                            <span class="text-[10px] bg-emerald-100 text-emerald-600 px-2 py-0.5 rounded-full font-bold">SYSTEM THINKING</span>
-                            <h4 class="font-bold mt-2">系統思考：如何避免永續轉型的「局部優化」陷阱</h4>
-                        </div>
+                <div class="relative rounded-[32px] overflow-hidden shadow-2xl h-[450px] group reveal">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200" 
+                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Mountain Landscape">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gogoro-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 right-10 text-white">
+                        <span class="text-xs bg-gogoro-green text-gogoro-black px-3 py-1 rounded-full font-bold uppercase tracking-wider">Belief</span>
+                        <h4 class="text-2xl font-bold mt-4">「永續不是一個終點，而是一個持續優化的動態系統。」</h4>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-40 px-6 text-center">
-        <div class="max-w-3xl mx-auto reveal">
-            <h2 class="text-5xl md:text-7xl font-bold tracking-tight mb-10">開始您的轉型之路。</h2>
-            <p class="text-xl text-gray-500 mb-12">無論是 ESG 輔導需求，或是 AI 導入諮詢，期待與您共同探討。</p>
-            <div class="inline-flex flex-col items-center">
-                <a href="mailto:harry.hsiao@example.com" class="text-2xl md:text-3xl font-medium hover:text-blue-600 transition underline underline-offset-8 decoration-1">
-                    harry.hsiao@crowe.tw
-                </a>
-                <p class="mt-8 text-sm text-gray-400">目前服務於國富浩華 (Crowe TW) 永續發展部門</p>
+    <!-- Gogoro-style 互動數據看板 (Impact Section) -->
+    <section id="impact" class="py-32 bg-gogoro-black text-white px-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-gogoro-green/5 rounded-full filter blur-[100px] pointer-events-none"></div>
+        <div class="max-w-[1200px] mx-auto relative z-10">
+            <div class="mb-16 reveal">
+                <span class="text-gogoro-green text-xs font-semibold tracking-wider uppercase">PERFORMANCE METRICS</span>
+                <h2 class="text-4xl md:text-6xl font-bold tracking-tight mt-4">實績指標與社會影響力</h2>
+                <p class="text-gray-400 mt-4 text-lg">整合 ESG 指標、碳盤查、社會價值與稅務合規的量化成果</p>
+            </div>
+
+            <!-- 控制 Tab 選單 -->
+            <div class="flex flex-wrap gap-2 md:gap-4 mb-16 border-b border-white/10 pb-6 reveal">
+                <button onclick="switchImpactTab('esg')" id="tab-esg" class="tab-btn active px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-white/10 text-white hover:bg-white/20">
+                    永續報告與確信
+                </button>
+                <button onclick="switchImpactTab('carbon')" id="tab-carbon" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-transparent text-gray-400 hover:text-white hover:bg-white/5">
+                    溫室氣體盤查
+                </button>
+                <button onclick="switchImpactTab('sroi')" id="tab-sroi" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-transparent text-gray-400 hover:text-white hover:bg-white/5">
+                    SROI 社會價值
+                </button>
+                <button onclick="switchImpactTab('tax')" id="tab-tax" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 bg-transparent text-gray-400 hover:text-white hover:bg-white/5">
+                    移轉訂價與稅務
+                </button>
+            </div>
+
+            <!-- 數據看板顯示內容 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[350px] reveal">
+                <!-- 左側超大數字與標籤 -->
+                <div class="lg:col-span-6 flex flex-col justify-center">
+                    <div id="impact-content-title" class="text-xs md:text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">服務上市櫃企業規模</div>
+                    <div id="impact-content-value" class="text-6xl md:text-[7rem] font-bold text-gogoro-green tracking-tight leading-none mb-6 gogoro-num-shadow">
+                        2.5 兆+ <span class="text-2xl font-normal text-white">新台幣</span>
+                    </div>
+                    <p id="impact-content-desc" class="text-gray-300 text-lg font-light leading-relaxed max-w-xl">
+                        負責輔導與確信之上市櫃企業總市值規模。透過重大性議題辨識、GRI/SASB/TCFD 框架導入，並協助準備問卷與撰寫永續報告書，實現合規且引引導組織變革。
+                    </p>
+                </div>
+
+                <!-- 右側代表企業與服務實績 -->
+                <div class="lg:col-span-6 bg-gogoro-darkGray p-8 md:p-12 rounded-[32px] border border-white/5 shadow-2xl relative">
+                    <div class="absolute -top-3 -right-3 w-12 h-12 bg-gogoro-green/10 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gogoro-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="w-1.5 h-6 bg-gogoro-green rounded-full"></span>
+                        <span id="impact-right-title">代表服務企業</span>
+                    </h3>
+                    <div id="impact-right-clients" class="flex flex-wrap gap-2 mb-8">
+                        <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition">遠傳電信</span>
+                        <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition">日月光投控</span>
+                        <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition">寒舍</span>
+                        <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition">中華化學</span>
+                        <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition">亞力電機</span>
+                    </div>
+
+                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">服務涵蓋項目</h4>
+                    <ul id="impact-right-list" class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start"><span class="text-gogoro-green mr-2">✓</span> 永續報告書確信（主持外勤、訪談各部門）</li>
+                        <li class="flex items-start"><span class="text-gogoro-green mr-2">✓</span> 永續報告書輔導（準備問卷、重大性議題辨識）</li>
+                        <li class="flex items-start"><span class="text-gogoro-green mr-2">✓</span> GRI / SASB / TCFD / IFRS S1 與 S2 指標合規建議</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-[#f5f5f7] border-t border-gray-200 py-20 px-6">
+    <!-- 交錯滿版圖文區塊 - 專業經歷 (Experience) -->
+    <section id="experience" class="py-32 bg-white">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="mb-24 reveal text-center">
+                <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">PROFESSIONAL EXPERIENCE</span>
+                <h2 class="text-4xl md:text-6xl font-bold tracking-tight mt-4">深耕領域，引導變革。</h2>
+            </div>
+
+            <!-- 經歷 1：永續顧問經驗 (深色滿版區塊) -->
+            <div class="bg-gogoro-darkGray text-white rounded-[32px] overflow-hidden mb-16 shadow-xl grid grid-cols-1 lg:grid-cols-12 reveal">
+                <div class="lg:col-span-7 p-8 md:p-16 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="w-2 h-2 bg-gogoro-green rounded-full"></span>
+                            <span class="text-xs font-bold tracking-widest text-gogoro-green uppercase">Sustainability Consulting</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-8">永續顧問與綠色轉型</h3>
+                        
+                        <div class="space-y-6 text-gray-300 font-light text-sm md:text-base">
+                            <div class="flex items-start">
+                                <span class="text-gogoro-green mr-3 font-bold">01</span>
+                                <p><strong>永續報告書輔導與確信</strong>：主持外勤、啟始會議並深度訪談企業各部門，準備問卷以協助辨識重大議題，並撰寫與審查符合國際準則之永續報告書。</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gogoro-green mr-3 font-bold">02</span>
+                                <p><strong>ISO 14064-1 溫室氣體盤查與確信</strong>：協助企業識別排放源重大性，實地盤點及抽查相關憑證，完成溫室氣體排放量計算與報告編製。</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gogoro-green mr-3 font-bold">03</span>
+                                <p><strong>社會投資報酬率 SROI 評估</strong>：進行利害關係人盤點與訪談，繪製完整的成果事件鏈，考量四因子（衰退、歸因、替代、轉移）科學計算社會影響力報酬。</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-gogoro-green mr-3 font-bold">04</span>
+                                <p><strong>前瞻顧問專案</strong>：協助客戶檢索分析國內外永續前沿資訊、提供策略建議、設算廠房租金淨現值等商務決策支援。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-white/10">
+                        <span class="text-xs text-gray-500 uppercase font-bold tracking-wider block mb-3">代表服務客戶</span>
+                        <p class="text-gogoro-green font-medium text-sm">
+                            遠傳電信 · 日月光投控 · 寒舍集團 · 中國信託文教基金會 · 可寧衛 · 中華化學 · 亞力電機
+                        </p>
+                    </div>
+                </div>
+                <!-- 永續區塊右側背景圖 -->
+                <div class="lg:col-span-5 relative min-h-[300px] lg:min-h-auto">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1200" 
+                         class="absolute inset-0 w-full h-full object-cover" alt="Office Greenery">
+                    <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-gogoro-darkGray via-transparent to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- 經歷 2：稅務與移轉訂價經驗 (淺色滿版區塊) -->
+            <div class="bg-gogoro-lightGray text-gogoro-black rounded-[32px] overflow-hidden shadow-md grid grid-cols-1 lg:grid-cols-12 reveal">
+                <!-- 稅務區塊左側背景圖 -->
+                <div class="lg:col-span-5 relative min-h-[300px] lg:min-h-auto order-last lg:order-first">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200" 
+                         class="absolute inset-0 w-full h-full object-cover" alt="Tax and Finance Workspace">
+                    <div class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-l from-gogoro-lightGray via-transparent to-transparent"></div>
+                </div>
+                
+                <div class="lg:col-span-7 p-8 md:p-16 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="w-2 h-2 bg-[#0071e3] rounded-full"></span>
+                            <span class="text-xs font-bold tracking-widest text-[#0071e3] uppercase">Tax & Transfer Pricing</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-8">跨國稅務合規與移轉訂價</h3>
+                        
+                        <div class="space-y-6 text-gray-700 font-light text-sm md:text-base">
+                            <div class="flex items-start">
+                                <span class="text-[#0071e3] mr-3 font-bold">01</span>
+                                <p><strong>集團移轉訂價 (TP) 規劃與評估</strong>：協助跨國集團及子公司分析移轉訂價，運用國際財金資料庫，評估利潤率是否符合同業常規交易區間。</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-[#0071e3] mr-3 font-bold">02</span>
+                                <p><strong>稅局專案查核回覆與溝通</strong>：當集團利潤率落於常規區間之外時，協助釐清實質原因、建立論據，並代表向稅務局進行說明與答辯。</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-[#0071e3] mr-3 font-bold">03</span>
+                                <p><strong>專案稅務與查核防禦</strong>：成功協助凱銳、榮星等知名上市櫃企業進行稅局專案查核，解答稅局疑問並協助客戶與稅局間的合規與申報。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-gogoro-border">
+                        <span class="text-xs text-gray-400 uppercase font-bold tracking-wider block mb-3">代表服務客戶</span>
+                        <p class="text-[#0071e3] font-medium text-sm">
+                            長榮集團 · 長榮航太 · 英濟 · 凱銳 · 榮星
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 學歷與聯絡顧問 (Education & Contact) -->
+    <section id="education" class="py-32 bg-gogoro-lightGray px-6">
         <div class="max-w-[1200px] mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start gap-12 text-[12px] text-gray-500">
-                <div class="max-w-sm">
-                    <p class="mb-4">一個人走得快，一群人走得遠。</p>
-                    <p>© 2026 Harry Hsiao. All rights reserved.</p>
-                </div>
-                <div class="flex space-x-12">
-                    <div class="space-y-2">
-                        <p class="font-bold text-black">專業領域</p>
-                        <p>ESG Strategy</p>
-                        <p>System Thinking</p>
-                        <p>AI Automation</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- 學歷 -->
+                <div class="bg-white p-10 md:p-12 rounded-[32px] border border-gogoro-border shadow-sm flex flex-col justify-between reveal">
+                    <div>
+                        <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">EDUCATION</span>
+                        <h3 class="text-3xl font-bold mt-4 mb-8">教育程度</h3>
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 bg-[#f5f5f7] rounded-2xl flex items-center justify-center shrink-0">
+                                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold">國立中山大學</h4>
+                                <p class="text-gray-500 text-sm mt-1">財務管理學系學士 (Bachelor of Science in Finance)</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-2">
-                        <p class="font-bold text-black">社群連結</p>
-                        <p><a href="#" class="hover:underline">LinkedIn</a></p>
-                        <p><a href="#" class="hover:underline">Medium</a></p>
+                    <div class="mt-12 pt-8 border-t border-gogoro-border">
+                        <p class="text-sm text-gray-500 italic">「結合財務管理的量化思維，在 ESG 與稅務合規領域創造具體、可驗證的經濟與社會效益。」</p>
                     </div>
                 </div>
+
+                <!-- 聯絡方式 -->
+                <div id="contact" class="bg-gogoro-black text-white p-10 md:p-12 rounded-[32px] border border-white/5 shadow-2xl flex flex-col justify-between reveal">
+                    <div>
+                        <span class="text-gogoro-green text-xs font-bold tracking-wider uppercase">CONTACT</span>
+                        <h3 class="text-3xl font-bold mt-4 mb-8">聯絡顧問</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest">Office Email</p>
+                                <a href="mailto:harry.hsiao@crowe.tw" class="text-lg md:text-xl font-semibold text-gogoro-green hover:underline decoration-1 underline-offset-4">
+                                    harry.hsiao@crowe.tw
+                                </a>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-widest">Office Phone</p>
+                                    <p class="text-sm font-medium mt-1">+886 2 8770 5181 Ext. 7302</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-widest">Mobile Phone</p>
+                                    <p class="text-sm font-medium mt-1">+886 916169940</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest">Office Address</p>
+                                <p class="text-sm text-gray-300 mt-1">Crowe (TW) CPAs<br>7F., No. 122, Dunhua N. Rd., Songshan Dist., Taipei 105405</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12 pt-8 border-t border-white/10">
+                        <p class="text-[11px] text-gray-500">目前服務於國富浩華聯合會計師事務所 (Crowe TW) 永續發展與稅務部門</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gogoro-style 備註說明細則 (Sosumi Footnotes) -->
+    <section class="py-16 bg-[#0c0d0e] border-t border-white/5 text-[11px] text-gray-500 leading-relaxed px-6">
+        <div class="max-w-[1200px] mx-auto">
+            <h5 class="font-bold text-gray-400 mb-3 uppercase tracking-wider">備註與說明細則 (Methodology & Footnotes)</h5>
+            <ol class="list-decimal pl-4 space-y-2">
+                <li>本履歷所稱「2.5 兆+新台幣市值」係指截至 2026 年所輔導、確信及提供諮詢之上市櫃企業（包含遠傳電信、日月光投控等）之公開市場歷史市值加總，非單一年度產值或顧問合約金額。</li>
+                <li>溫室氣體盤查與現場盤點據點數依據輔導個案以 ISO 14064-1 溫室氣體盤查準則及確信準則進行之申報/確信查核範圍累計計算。</li>
+                <li>社會投資報酬率 SROI (Social Return on Investment) 數值係依據 Social Value International 國際架構，經利害關係人深度訪談、繪製成果事件鏈、並考量四因子（Decay, Attribution, Deadweight, Displacement）校正折現後所得之量化社會淨價值，數值會因各專案計畫特性而異。</li>
+                <li>移轉訂價規劃與專案查核通過係指代表長榮集團、長榮航太、凱銳、榮星等客戶回覆稅務機關專案查核，並在合規範圍內最終取得稅局查定通知書之成功合規率。</li>
+                <li>此網頁排版與視覺元素向 Gogoro 現代綠能與科技美學致敬，象徵系統性思維與綠色科技之整合。</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-gogoro-black border-t border-white/10 py-12 text-center text-xs text-gray-500 px-6">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2026 Harry Hsiao 蕭聖霖. All rights reserved. Crowe (TW) CPAs Manager.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-gogoro-green transition">LinkedIn</a>
+                <a href="#" class="hover:text-gogoro-green transition">Medium</a>
             </div>
         </div>
     </footer>
 
+    <!-- JS 邏輯 -->
     <script>
-        
-        // 1. 滾動顯示動畫 (Scroll Reveal)
+        // 1. 滾動顯示動畫 (IntersectionObserver)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // 2. 系統思維 Canvas 動畫
+        // 2. 數據看板切換邏輯 (Impact Section Switcher)
+        const tabData = {
+            esg: {
+                title: '服務上市櫃企業規模',
+                value: '2.5 兆+ <span class="text-2xl font-normal text-white">新台幣</span>',
+                desc: '負責輔導與確信之上市櫃企業總市值規模。透過重大性議題辨識、GRI/SASB/TCFD 框架導入，並協助準備問卷與撰寫永續報告書，實現合規且引導組織變革。',
+                rightTitle: '永續報告書代表客戶',
+                clients: ['遠傳電信', '日月光投控', '寒舍', '中華化學', '亞力電機'],
+                list: [
+                    '永續報告書確信（主持外勤、訪談各部門）',
+                    '永續報告書輔導（準備問卷、重大性議題辨識、撰寫報告書）',
+                    'GRI / SASB / TCFD / IFRS S1 與 S2 指標合規建議'
+                ]
+            },
+            carbon: {
+                title: '溫室氣體現場盤查與確信',
+                value: '30+ <span class="text-2xl font-normal text-white">廠區及據點</span>',
+                desc: '依據 ISO 14064-1 標準，實際計算企業範疇一、範疇二之溫室氣體排放量，並進行排放源重大性識別。到現場實地盤點排放源，抽查相關憑證確保數據準確度與合規性。',
+                rightTitle: '碳盤查代表客戶與範疇',
+                clients: ['日月光投控', '可寧衛', '亞力電機', '中華化學'],
+                list: [
+                    'ISO 14064-1 溫室氣體排放量計算與報告書編製',
+                    '排放源重大性識別與現場盤點確信',
+                    '跨部門訪談與溫排憑證抽查驗證'
+                ]
+            },
+            sroi: {
+                title: 'SROI 社會投資報酬率',
+                value: '1 : 4.5+ <span class="text-2xl font-normal text-white">社會影響力價值</span>',
+                desc: '盤點並訪談各專案利害關係人，繪製完整的成果事件鏈。考量四因子（衰退、歸因、替代、轉移）進行嚴格價值設算，將社會影響力進行貨幣化衡量，創造高信賴度 SROI 報告。',
+                rightTitle: 'SROI 代表專案客戶',
+                clients: ['中國信託文教基金會'],
+                list: [
+                    '利害關係人盤點與深度訪談',
+                    '成果事件鏈（Chain of Events）繪製與定性分析',
+                    'SROI 敏感度分析與四因子折現設算'
+                ]
+            },
+            tax: {
+                title: '移轉訂價與稅局查核通過率',
+                value: '100% <span class="text-2xl font-normal text-white">專案查核通過</span>',
+                desc: '負責跨國集團及大型子公司移轉訂價規劃，利用國際財金資料庫進行同業利潤率常規交易區間分析。於利潤率異常時建立事實抗辯，成功協助客戶回覆稅局並通過專案查核。',
+                rightTitle: '稅務與移轉訂價代表客戶',
+                clients: ['長榮集團', '長榮航太', '英濟', '凱銳', '榮星'],
+                list: [
+                    '跨國集團及子公司移轉訂價 (TP) 規劃與合規報告',
+                    '國際財金資料庫（如 Bureau van Dijk 等）利潤率常規分析',
+                    '協助客戶回覆稅局專案查核及申報答辯'
+                ]
+            }
+        };
+
+        function switchImpactTab(tabKey) {
+            // 1. 更新按鈕狀態
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-white/10', 'text-white');
+                btn.classList.add('bg-transparent', 'text-gray-400');
+            });
+            const activeBtn = document.getElementById(`tab-${tabKey}`);
+            activeBtn.classList.add('active', 'bg-white/10', 'text-white');
+            activeBtn.classList.remove('bg-transparent', 'text-gray-400');
+
+            // 2. 更新內容並加入過渡動畫
+            const data = tabData[tabKey];
+            const contentValue = document.getElementById('impact-content-value');
+            const contentTitle = document.getElementById('impact-content-title');
+            const contentDesc = document.getElementById('impact-content-desc');
+            const rightTitle = document.getElementById('impact-right-title');
+            const rightClients = document.getElementById('impact-right-clients');
+            const rightList = document.getElementById('impact-right-list');
+
+            // 漸變效果
+            [contentValue, contentTitle, contentDesc, rightTitle, rightClients, rightList].forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(10px)';
+                el.style.transition = 'all 0.3s ease';
+            });
+
+            setTimeout(() => {
+                contentTitle.innerHTML = data.title;
+                contentValue.innerHTML = data.value;
+                contentDesc.innerHTML = data.desc;
+                rightTitle.innerHTML = data.rightTitle;
+
+                // 重新渲染代表客戶 labels
+                rightClients.innerHTML = '';
+                data.clients.forEach(client => {
+                    const span = document.createElement('span');
+                    span.className = 'bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition';
+                    span.innerText = client;
+                    rightClients.appendChild(span);
+                });
+
+                // 重新渲染清單
+                rightList.innerHTML = '';
+                data.list.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start';
+                    li.innerHTML = `<span class="text-gogoro-green mr-2">✓</span> ${item}`;
+                    rightList.appendChild(li);
+                });
+
+                // 恢復顯示
+                [contentValue, contentTitle, contentDesc, rightTitle, rightClients, rightList].forEach(el => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 300);
+        }
+
+        // 3. 系統思維 Canvas 粒子動畫 (優化配色為 Gogoro 亮綠色)
         const canvas = document.getElementById('system-canvas');
         const ctx = canvas.getContext('2d');
         let points = [];
@@ -303,20 +543,21 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             points = [];
-            for(let i = 0; i < 50; i++) {
+            const pointCount = window.innerWidth < 768 ? 25 : 55;
+            for(let i = 0; i < pointCount; i++) {
                 points.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
                 });
             }
         }
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(0, 113, 227, 0.2)';
-            ctx.fillStyle = 'rgba(0, 113, 227, 0.4)';
+            ctx.strokeStyle = 'rgba(0, 209, 178, 0.15)'; // Gogoro Green 綠色連結線
+            ctx.fillStyle = 'rgba(0, 209, 178, 0.3)';
 
             points.forEach((p, i) => {
                 p.x += p.vx;
@@ -332,7 +573,7 @@
                 for(let j = i + 1; j < points.length; j++) {
                     const p2 = points[j];
                     const dist = Math.sqrt((p.x - p2.x)**2 + (p.y - p2.y)**2);
-                    if(dist < 150) {
+                    if(dist < 160) {
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -347,7 +588,7 @@
         initCanvas();
         draw();
 
-        // 初始英雄區塊動畫
+        // 初始英雄區塊動畫啟動
         window.onload = () => {
             document.getElementById('hero-trigger').classList.add('active');
         }
