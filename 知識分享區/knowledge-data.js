@@ -2,6 +2,13 @@
 // Generated on 2026-07-05
 const KNOWLEDGE_DATA = [
     {
+        "filename":  "IFRS S1S2研討會_260625.html",
+        "title":  "IFRS S1/S2 永續財務揭露研討會 - 國富浩華聯合會計師事務所",
+        "summary":  "從「自願編製報告書」走向「與財報同等法力」，深入解析 IFRS S1 與 S2 永續揭露準則接軌時程與董監事法律責任。",
+        "date":  "2026-07-05",
+        "path":  "知識分享區/IFRS S1S2研討會_260625.html"
+    },
+    {
         "filename":  "台灣綠電市場.html",
         "title":  "台灣綠電市場洞察簡報｜國富浩華 Crowe (TW)",
         "summary":  "解讀資策會《台灣綠電市場手冊》，聚焦企業綠電採購的核心洞見、關鍵數據與可執行的行動建議。",

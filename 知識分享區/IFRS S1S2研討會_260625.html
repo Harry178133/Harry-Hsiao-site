@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS S1/S2 永續財務揭露研討會 - 國富浩華聯合會計師事務所</title>
+    <meta name="description" content="從「自願編製報告書」走向「與財報同等法力」，深入解析 IFRS S1 與 S2 永續揭露準則接軌時程與董監事法律責任。">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-indigo: #011E41;
+            --color-amber: #F5A800;
+            --color-emerald: #10B981;
+            --color-white: #FFFFFF;
+            --color-light-bg: #F8FAFC;
+            --color-dark-bg: #091325;
+            --color-text-dark: #0F172A;
+            --color-text-muted: #475569;
+            --color-text-light: #E2E8F0;
+            --color-border: rgba(226, 232, 240, 0.8);
+            --transition-speed: 0.4s;
+            --slide-width: 1920px;
+            --slide-height: 1080px;
+        }
+
+        .dark-mode {
+            --color-light-bg: #091325;
+            --color-text-dark: #F8FAFC;
+            --color-text-muted: #94A3B8;
+            --color-border: rgba(51, 65, 85, 0.6);
+            --color-white: #1E293B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #030712;
+            color: var(--color-text-dark);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* 16:9 Widescreen Container */
+        .presentation-wrapper {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            position: relative;
+            transform-origin: top left;
+            overflow: hidden;
+            background-color: var(--color-light-bg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        /* Common Slide Layout */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease-in-out;
+            padding: 140px 100px 100px 100px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Brand Headers & Footers */
+        .slide-header {
+            position: absolute;
+            top: 40px;
+            left: 100px;
+            right: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: 15px;
+            z-index: 10;
+        }
+
+        .header-left {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            letter-spacing: 1px;
+        }
+
+        .header-left span {
+            color: var(--color-amber);
+            margin-right: 10px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-pinnacle {
+            width: 32px;
+            height: 32px;
+        }
+
+        .brand-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-indigo);
+            letter-spacing: -0.5px;
+            transition: color var(--transition-speed);
+        }
+
+        .dark-mode .brand-text {
+            color: var(--color-white);
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 40px;
+            left: 100px;
+            right: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-left {
+            font-size: 20px;
+            color: var(--color-text-muted);
+        }
+
+        .footer-progress-bar {
+            flex-grow: 1;
+            margin: 0 40px;
+            height: 4px;
+            background-color: var(--color-border);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--color-amber), var(--color-emerald));
+            transition: width 0.3s ease;
+        }
+
+        .footer-right {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Slide Cover Layout (Special) */
+        .slide-cover {
+            background-color: var(--color-dark-bg);
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0;
+        }
+
+        .cover-content {
+            max-width: 1400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover-pinnacle {
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px rgba(245, 168, 0, 0.4));
+        }
+
+        .cover-badge {
+            background: rgba(245, 168, 0, 0.15);
+            border: 1px dashed var(--color-amber);
+            color: var(--color-amber);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+            display: inline-block;
+        }
+
+        .cover-title {
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 25px;
+            line-height: 1.25;
+            background: linear-gradient(135deg, #FFFFFF 50%, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cover-subtitle {
+            font-size: 32px;
+            font-weight: 400;
+            color: #94A3B8;
+            margin-bottom: 50px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cover-divider {
+            width: 120px;
+            height: 4px;
+            background-color: var(--color-amber);
+            margin: 0 auto 50px auto;
+            border-radius: 2px;
+        }
+
+        .cover-meta {
+            font-size: 24px;
+            color: #64748B;
+            letter-spacing: 1px;
+        }
+
+        /* Typographic Helpers from AGENTS.md */
+        .break-keep {
+            word-break: keep-all;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+        /* Slide Titles */
+        .slide-title {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--color-indigo);
+            margin-bottom: 30px;
+            line-height: 1.2;
+            transition: color var(--transition-speed);
+        }
+
+        .dark-mode .slide-title {
+            color: var(--color-white);
+        }
+
+        /* Layout Grid and Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            flex-grow: 1;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed), border-color var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--color-indigo);
+        }
+
+        .card.accent-amber::before {
+            background-color: var(--color-amber);
+        }
+
+        .card.accent-emerald::before {
+            background-color: var(--color-emerald);
+        }
+
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--color-indigo);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .dark-mode .card-title {
+            color: var(--color-white);
+        }
+
+        .card-content {
+            font-size: 22px;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 16px;
+            font-size: 22px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .card-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--color-amber);
+            font-weight: bold;
+            font-size: 28px;
+            top: -2px;
+        }
+
+        .card-list.bullet-green li::before {
+            color: var(--color-emerald);
+        }
+
+        /* Presenter Controls UI */
+        .controls-overlay {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            background-color: rgba(1, 30, 65, 0.8);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:hover {
+            background-color: var(--color-amber);
+            transform: scale(1.1);
+        }
+
+        /* Presentation Timer */
+        .timer-display {
+            background-color: rgba(1, 30, 65, 0.85);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-emerald);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Side Drawers */
+        .drawer {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 420px;
+            background-color: rgba(9, 19, 37, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            z-index: 90;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .drawer-toc {
+            left: 0;
+            transform: translateX(-100%);
+        }
+
+        .drawer-notes {
+            right: 0;
+            transform: translateX(100%);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: none;
+        }
+
+        .drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-amber);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toc-list {
+            list-style: none;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .toc-item {
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 16px;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+            color: #94A3B8;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .toc-item.active {
+            background-color: rgba(245, 168, 0, 0.15);
+            color: var(--color-amber);
+            border-left: 3px solid var(--color-amber);
+            font-weight: 600;
+        }
+
+        .notes-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #CBD5E1;
+            overflow-y: auto;
+            flex-grow: 1;
+            white-space: pre-line;
+        }
+
+        /* Timeline and Process Diagrams */
+        .timeline-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 50px;
+            padding: 0 40px;
+            flex-grow: 1;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            right: 100px;
+            height: 4px;
+            background-color: var(--color-border);
+            z-index: 1;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            height: 4px;
+            background-color: var(--color-amber);
+            z-index: 2;
+            width: 0;
+            transition: width 0.8s ease;
+        }
+
+        .timeline-node {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 250px;
+        }
+
+        .node-dot {
+            width: 24px;
+            height: 24px;
+            background-color: var(--color-white);
+            border: 4px solid var(--color-border);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .active .timeline-progress {
+            width: 100%;
+        }
+
+        .slide.active .timeline-node:nth-child(2) .node-dot { border-color: var(--color-amber); background-color: var(--color-amber); }
+        .slide.active .timeline-node:nth-child(3) .node-dot { border-color: var(--color-amber); background-color: var(--color-amber); }
+        .slide.active .timeline-node:nth-child(4) .node-dot { border-color: var(--color-amber); background-color: var(--color-amber); }
+        .slide.active .timeline-node:nth-child(5) .node-dot { border-color: var(--color-amber); background-color: var(--color-amber); }
+
+        .node-date {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-indigo);
+            margin-bottom: 10px;
+        }
+
+        .dark-mode .node-date {
+            color: var(--color-white);
+        }
+
+        .node-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+        }
+
+        .node-desc {
+            font-size: 18px;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* Double Materiality Layout */
+        .dm-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .dm-circle {
+            width: 320px;
+            height: 320px;
+            border-radius: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .dm-circle.indigo {
+            background: linear-gradient(135deg, var(--color-indigo), #023E7D);
+        }
+
+        .dm-circle.emerald {
+            background: linear-gradient(135deg, var(--color-emerald), #059669);
+        }
+
+        .dm-vs {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-amber);
+            background-color: var(--color-white);
+            border: 2px solid var(--color-border);
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .dm-title {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .dm-desc {
+            font-size: 20px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Divider slide */
+        .slide-divider {
+            background-color: var(--color-indigo);
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .divider-num {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-amber);
+            margin-bottom: 20px;
+        }
+
+        .divider-title {
+            font-size: 54px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .divider-line {
+            width: 100px;
+            height: 4px;
+            background-color: var(--color-amber);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-wrapper" id="presentation-container">
+        
+        <!-- Controls Overlay -->
+        <div class="controls-overlay">
+            <div class="timer-display" id="presentation-timer" onclick="toggleTimer()" ondblclick="resetTimer()">
+                <div class="timer-dot"></div>
+                <span id="timer-text">00:00</span>
+            </div>
+            <div class="control-btn" onclick="toggleTOC()" title="章節目錄 (Key: M)">☰</div>
+            <div class="control-btn" onclick="toggleNotes()" title="講師備忘錄 (Key: N)">📝</div>
+            <div class="control-btn" onclick="toggleTheme()" title="主題切換 (Key: T)">🌓</div>
+        </div>
+
+        <!-- Left Table of Contents Drawer -->
+        <div class="drawer drawer-toc" id="drawer-toc">
+            <div class="drawer-title">章節大綱</div>
+            <ul class="toc-list" id="toc-list">
+                <!-- Javascript will inject toc items -->
+            </ul>
+        </div>
+
+        <!-- Right Speaker Notes Drawer -->
+        <div class="drawer drawer-notes" id="drawer-notes">
+            <div class="drawer-title">講師備忘錄</div>
+            <div class="notes-content" id="notes-content">
+                <!-- Javascript will inject notes based on active slide -->
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 1: Cover (Dark theme)
+             ========================================================================== -->
+        <div class="slide slide-cover active" data-slide="1">
+            <div class="cover-content">
+                <!-- Crowe SVG Logo -->
+                <svg class="cover-pinnacle" viewBox="0 0 100 100" width="80" height="80">
+                    <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                    <polygon points="80,45 80,75 50,45" fill="#D97706" />
+                    <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                    <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                </svg>
+                <div class="cover-badge break-keep">IFRS 永續揭露準則實務系列</div>
+                <h1 class="cover-title break-keep">
+                    IFRS S1 & S2 <span class="inline-block">永續財務揭露</span><br>
+                    <span class="inline-block">法規布局與實務關鍵</span>
+                </h1>
+                <div class="cover-subtitle break-keep">
+                    從「自願編製報告書」走向「與財報同等法力」的企業合規指南
+                </div>
+                <div class="cover-divider"></div>
+                <div class="cover-meta break-keep">
+                    Crowe Taiwan 國富浩華聯合會計師事務所  |  永續發展與永續諮詢團隊
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 2: TOC (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <div class="header-left"><span>目錄</span>TABLE OF CONTENTS</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">今日研討大綱與簡報路徑</h2>
+            
+            <div class="grid-4">
+                <div class="card accent-amber" onclick="goToSlide(3)">
+                    <div class="card-icon">01</div>
+                    <div class="card-title break-keep">企業面臨的<br>轉型契機與防漂綠</div>
+                    <div class="card-content break-keep">
+                        剖析供應鏈壓力、綠色通牒與漂綠（Greenwashing）的三大類別，以及隱蔽性的 Greenhushing。
+                    </div>
+                </div>
+                <div class="card accent-amber" onclick="goToSlide(5)">
+                    <div class="card-icon">02</div>
+                    <div class="card-title break-keep">接軌時程與<br>董事會合規責任</div>
+                    <div class="card-content break-keep">
+                        詳細解析 2026 至 2029 導入藍圖，以及董監事面臨「推定過失」與證交法刑事責任的應對。
+                    </div>
+                </div>
+                <div class="card accent-emerald" onclick="goToSlide(8)">
+                    <div class="card-icon">03</div>
+                    <div class="card-title break-keep">IFRS S1 & S2<br>核心架構與 TCFD 差異</div>
+                    <div class="card-content break-keep">
+                        解析「一般準則 S1」與「氣候準則 S2」四大構面，與 TCFD 在財務聯結與重大性判斷的演進。
+                    </div>
+                </div>
+                <div class="card accent-emerald" onclick="goToSlide(9)">
+                    <div class="card-icon">04</div>
+                    <div class="card-title break-keep">雙重重大性與<br>合比例豁免條款</div>
+                    <div class="card-content break-keep">
+                        對比 IFRS 與 GRI 重大性定義，說明合比例原則（Proportionality）及接軌首年的四大過渡性豁免。
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">02 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 3: Part 1 - Opportunities and Greenwashing (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <div class="header-left"><span>一、轉型契機</span>Part 1  |  企業面臨的轉型契機與防漂綠</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">企業面臨的轉型契機與「防漂綠」要務</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-icon">⚡ 轉型契機：從避險走向價值創造</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>降低成本效益</strong>：如 3M 公司將溶劑製程改為水性，節省高達 17 億美元成本。</li>
+                        <li class="break-keep"><strong>優化營運與減廢</strong>：杜邦（DuPont）推動「零廢棄」倡議，果斷汰除高廢棄物尼龍地毯部門。</li>
+                        <li class="break-keep"><strong>產品與服務創新</strong>：陶氏化學（Dow）研發太陽能屋瓦，成功轉型高科技材料領域。</li>
+                        <li class="break-keep"><strong>主動講述永續故事</strong>：GE 推動「綠色創想」，研發投入 120 億創造 1600 億營收。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="color: var(--color-amber);">⚠️ 防範漂綠：三種不實陳述類型</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>言行不一的承諾</strong>：宣稱高水準減碳目標，但未採取實際行動或無託付軌跡。</li>
+                        <li class="break-keep"><strong>不實的環境效益</strong>：隨意貼上「綠色」、「碳中和」標籤，缺乏科學依據與數據支持。</li>
+                        <li class="break-keep"><strong>誤導的財務與風險</strong>：提供虛假氣候與財務關聯，例如在重大工程安全上誤導投資人。</li>
+                        <li class="break-keep"><strong>Greenhushing（綠默）</strong>：為規避漂綠指責，對自身環境指標保持沉默，規避受託責任。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">03 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 4: Part 1 - Value Chain and Data Aggregators (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <div class="header-left"><span>一、轉型契機</span>Part 1  |  價值鏈擴展與第三方評級壓力</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">供應鏈骨牌效應與數據聚合者的追蹤</h2>
+            
+            <div class="grid-2">
+                <div class="card accent-emerald">
+                    <div class="card-icon">⛓️ 供應鏈骨牌效應：打破傳統邊界</div>
+                    <ul class="card-list bullet-green">
+                        <li class="break-keep"><strong>範疇三（Scope 3）強制傳導</strong>：大型納管企業必須揭露其整體價值鏈碳排放，導致中下游供應商（即便未達法規門檻）也必須提供精準盤查數據。</li>
+                        <li class="break-keep"><strong>國際供應鏈通牒</strong>：美日歐品牌商（如蘋果、微軟、台積電供應鏈）強制要求旗下所有供應商落實實質減碳。</li>
+                        <li class="break-keep"><strong>無法置身事外</strong>：中小企業若無法提供數據，將直接面臨被剔除出供應鏈的生存危機。</li>
+                    </ul>
+                </div>
+                <div class="card accent-amber">
+                    <div class="card-icon">📊 數據聚合者與評級機構的監控</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>多元評級雷達</strong>：Morningstar、DJSI、CDP 等評級機構，透過結構化（公司報告）與非結構化（新聞、環保處罰）資料實行全時段評級。</li>
+                        <li class="break-keep"><strong>同業排名壓力</strong>：投信基金與主權基金直接參考評級結果進行資金配置，評等低劣將導致資金成本劇增。</li>
+                        <li class="break-keep"><strong>主動管理揭露</strong>：評級機構的方法學不同且雜亂，企業必須主動管理資料輸入，防止被「錯誤標籤」。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">04 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 5: Part 2 - Timeline (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <div class="header-left"><span>二、接軌時程</span>Part 2  |  台灣接軌 IFRS 永續準則時程藍圖</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">我國接軌 IFRS 永續揭露準則四階段時程</h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-progress"></div>
+                
+                <div class="timeline-node">
+                    <div class="node-dot"></div>
+                    <div class="node-date">2026 年 (第一階段)</div>
+                    <div class="node-title break-keep">資本額 100 億以上</div>
+                    <div class="node-desc break-keep">首批適用上市櫃公司，於 2027 年申報 2026 年度永續資訊。</div>
+                </div>
+                
+                <div class="timeline-node">
+                    <div class="node-dot"></div>
+                    <div class="node-date">2027 年 (第二階段)</div>
+                    <div class="node-title break-keep">資本額 50億 ~ 100億</div>
+                    <div class="node-desc break-keep">第二批上市櫃公司適用，於 2028 年進行申報。</div>
+                </div>
+                
+                <div class="timeline-node">
+                    <div class="node-dot"></div>
+                    <div class="node-date">2028 年 (第三階段)</div>
+                    <div class="node-title break-keep">資本額 50 億以下</div>
+                    <div class="node-desc break-keep">其餘所有上市櫃公司全面接軌適用，於 2029 年申報。</div>
+                </div>
+                
+                <div class="timeline-node">
+                    <div class="node-dot"></div>
+                    <div class="node-date">2029 年 (第四階段)</div>
+                    <div class="node-title break-keep">財報與年報同步申報</div>
+                    <div class="node-desc break-keep">全面落實永續專章與年報、財務報告同日公告申報之法定義務。</div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">05 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 6: Part 2 - Milestones & Board Oversight (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <div class="header-left"><span>二、接軌時程</span>Part 2  |  導入工項與董事會合規責任</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">專案重點工項與董事會的法規實質責任</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title break-keep">🏢 專案導入四大重點工項</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>成立跨部門小組</strong>：包含財務、廠務、永續與稽核，擬定並向主管機關申報導入計畫書及執行進度表。</li>
+                        <li class="break-keep"><strong>現況盤點與差異分析</strong>：辨認現行 ESG 揭露數據與 IFRS S1/S2 要求之落差（Gap Analysis）。</li>
+                        <li class="break-keep"><strong>財務聯結與風險鑑別</strong>：量化氣候風險（實體/轉型）對資產負債表及獲利的潛在財報衝擊度。</li>
+                        <li class="break-keep"><strong>試行編製與流程優化</strong>：啟動「試編作業」，修正內部控制度，確保永續數據的稽核軌跡完整。</li>
+                    </ul>
+                </div>
+                <div class="card accent-amber">
+                    <div class="card-title break-keep">⚖️ 董事會的「推定過失」法律負擔</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>與財報具備同等法效</strong>：年報納入「永續專章」後，一旦有虛偽不實或蓄意造假，董監事將承擔推定過失責任。</li>
+                        <li class="break-keep"><strong>無法以「不知情」免責</strong>：律師警告，高層不能以「這是永續部門的事」或「不知細節」抗辯。</li>
+                        <li class="break-keep"><strong>保留監督實質軌跡</strong>：決策過程必須在議事錄留存明確的「監督動作」（如提問、審查紀錄、諮詢專業意見）。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">06 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 7: Part 2 - Legal Consequences (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <div class="header-left"><span>二、接軌時程</span>Part 2  |  永續揭露不實之刑事與民事風險</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">「永續揭露不實」連動財報不實之重罪風險</h2>
+            
+            <div class="grid-2">
+                <div class="card accent-amber">
+                    <div class="card-title break-keep">🚨 證券交易法之民刑事追訴</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>民事賠償責任</strong>：證交法第20-1條，發行人、發行人負責人對財務報告或主要內容之虛偽不實，承擔民事賠償責任。</li>
+                        <li class="break-keep"><strong>刑事重罪處罰</strong>：若被判定為蓄意欺騙或蓄意登載不實，將面臨證交法第171條、174條之三年以上、七年以上有期徒刑之重罪。</li>
+                        <li class="break-keep"><strong>證據時代來臨</strong>：永續資訊已不能僅作敘述性廣告，必須具備「可稽核性」與「數據確信證明」。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title break-keep">💥 環保違規與財報不實的「高度連動」</div>
+                    <ul class="card-list">
+                        <li class="break-keep"><strong>宣稱與事實不符</strong>：若企業對外宣稱其廠房百分之百合乎環境法規，但內部卻存在違法排汙、超標排放。</li>
+                        <li class="break-keep"><strong>雙重違規處分</strong>：此情況除面臨環保局裁罰外，因年報揭露不實，將連動構成《證券交易法》之資訊揭露不實重罪。</li>
+                        <li class="break-keep"><strong>審計委員會查核</strong>：獨立董事與審計委員會在審查年報與財報時，應深入勾稽環境裁罰紀錄。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">07 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 8: Part 3 - S1 & S2 Core Framework (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <div class="header-left"><span>三、架構解析</span>Part 3  |  IFRS S1 & S2 核心架構與四大構面</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">一般準則 S1 與氣候準則 S2 之四大核心構面</h2>
+            
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-icon" style="color: var(--color-indigo);">🏛️ 治理 (Governance)</div>
+                    <div class="card-content break-keep">
+                        企業如何監督與管理永續及氣候風險，明定董事會之權責分工、呈報管道與實質審議機制。
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="color: var(--color-indigo);">🎯 策略 (Strategy)</div>
+                    <div class="card-content break-keep">
+                        評估氣候與永續風險如何實質影響企業之商業模式、價值鏈、財務規劃以及在不同氣候情境下之彈性。
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="color: var(--color-indigo);">🔄 風險管理 (Risk Mgt)</div>
+                    <div class="card-content break-keep">
+                        企業識別、評估、排序與監控風險的流程，且該流程必須與企業整體的風險管理系統建立實質整合。
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="color: var(--color-indigo);">📈 指標與目標 (Metrics)</div>
+                    <div class="card-content break-keep">
+                        量化衡量企業在永續指標上之表現，包含溫室氣體排放量（範疇一、二及三）、產業特定指標與設定之目標。
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">08 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 9: Part 3 - Double Materiality & Proportionality (Light theme)
+             ========================================================================== -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <div class="header-left"><span>三、架構解析</span>Part 3  |  重大性原則與合比例豁免條款</div>
+                <div class="header-right">
+                    <svg class="brand-pinnacle" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                        <polygon points="80,45 80,75 50,45" fill="#011E41" />
+                        <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                        <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                    </svg>
+                    <div class="brand-text">Crowe</div>
+                </div>
+            </div>
+            
+            <h2 class="slide-title break-keep">「雙重重大性」與合比例原則的實務應用</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title break-keep">⚖️ 財務重大性 (IFRS) vs 衝擊重大性 (GRI)</div>
+                    <div class="dm-diagram">
+                        <div class="dm-circle indigo">
+                            <div class="dm-title break-keep">財務重大性</div>
+                            <div class="dm-desc break-keep">IFRS 關注：永續風險如何影響公司財務報表與前景，對象為「投資人」。</div>
+                        </div>
+                        <div class="dm-vs">VS</div>
+                        <div class="dm-circle emerald">
+                            <div class="dm-title break-keep">衝擊重大性</div>
+                            <div class="dm-desc break-keep">GRI 關注：企業營運對環境、社會及人群造成的衝擊，對象為「社會大眾」。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card accent-emerald">
+                    <div class="card-title break-keep">🛡️ 合比例原則與首年過渡豁免</div>
+                    <ul class="card-list bullet-green">
+                        <li class="break-keep"><strong>合比例作法（Proportionality）</strong>：企業可依據現有技能、可取得之資源，採用「無須付出過度成本」的揭露方式。</li>
+                        <li class="break-keep"><strong>首年免比較資訊</strong>：首次採用年度，無須提供前一年度的比較性財務資訊。</li>
+                        <li class="break-keep"><strong>範疇三豁免（過渡 1~3 年）</strong>：接軌首年得免除揭露範疇三溫室氣體排放，以利供應商數據蒐集。</li>
+                        <li class="break-keep"><strong>商業敏感例外</strong>：對於極具機密性的「機會」，若會損害競爭優勢，法令允許豁免揭露。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <div class="footer-left">Crowe Taiwan  |  國富浩華聯合會計師事務所</div>
+                <div class="footer-progress-bar"><div class="progress-fill"></div></div>
+                <div class="footer-right">09 / 10</div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SLIDE 10: Conclusion (Dark theme)
+             ========================================================================== -->
+        <div class="slide slide-cover" data-slide="10">
+            <div class="cover-content">
+                <svg class="cover-pinnacle" viewBox="0 0 100 100" width="70" height="70">
+                    <polygon points="50,15 80,45 50,45" fill="#F5A800" />
+                    <polygon points="80,45 80,75 50,45" fill="#D97706" />
+                    <polygon points="50,75 20,45 50,45" fill="#F5A800" />
+                    <polygon points="20,45 20,15 50,45" fill="#FBBF24" />
+                </svg>
+                <h1 class="cover-title break-keep" style="font-size: 50px; margin-bottom: 20px;">
+                    攜手國富浩華，穩健接軌 IFRS 永續準則
+                </h1>
+                <p class="cover-subtitle break-keep" style="font-size: 20px; max-width: 900px; margin-bottom: 40px;">
+                    我們結合審計確信、稅務規劃與永續諮詢團隊，協助企業精準鑑別氣候風險、完成永續專章試編，在永續合規新時代創造長期競爭力。
+                </p>
+                
+                <!-- Advisory Box -->
+                <div style="background: rgba(5, 45, 95, 0.6); border: 1px solid rgba(30, 70, 120, 0.8); border-radius: 16px; padding: 30px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 30px; max-width: 1000px; margin: 0 auto; text-align: left;">
+                    <div>
+                        <h3 style="color: var(--color-amber); font-size: 18px; margin-bottom: 15px; font-weight: 700;">💼 國富浩華 IFRS 接軌輔導範疇</h3>
+                        <ul class="card-list" style="color: #94A3B8; font-size: 14px;">
+                            <li class="break-keep" style="margin-bottom: 8px;">上市櫃公司 IFRS S1/S2 差異分析與 Gap 診斷</li>
+                            <li class="break-keep" style="margin-bottom: 8px;">年報「永續專章」試編輔導與流程優化</li>
+                            <li class="break-keep" style="margin-bottom: 8px;">氣候實體與轉型風險之財報聯結評估</li>
+                            <li class="break-keep" style="margin-bottom: 8px;">溫室氣體範疇一、二、三盤查與內部控制建置</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: rgba(30, 70, 120, 0.5); width: 1px; height: 100%;"></div>
+                    <div style="padding-left: 20px;">
+                        <h3 style="color: var(--color-white); font-size: 18px; margin-bottom: 15px; font-weight: 700;">📞 專業諮詢窗口</h3>
+                        <p style="color: #CBD5E1; font-size: 15px; line-height: 1.8;">
+                            <strong>國富浩華聯合會計師事務所 (Crowe Taiwan)</strong><br>
+                            永續發展諮詢小組  |  蕭宏宜 Harry Hsiao<br>
+                            🌐 官方網站：<a href="https://harry178133.github.io/crowe.html" target="_blank" style="color: var(--color-amber); text-decoration: none;">harry178133.github.io/crowe.html</a><br>
+                            ✉️ 服務信箱：<a href="mailto:harry.hsiao@crowe.tw" style="color: var(--color-amber); text-decoration: none;">harry.hsiao@crowe.tw</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <p style="color: #475569; font-size: 14px; margin-top: 40px;">
+                    © 2026 Crowe Taiwan. All rights reserved.  |  第 10 頁，共 10 頁
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Slides DB
+        const TOTAL_SLIDES = 10;
+        let currentSlide = 1;
+        let isDarkMode = false;
+
+        // Speaker Notes database synced to current active slide
+        const SPEAKER_NOTES = {
+            1: `【Slide 1 備忘錄】
+            大家好，今天我們要為大家說明的是『IFRS S1 與 S2 永續財務揭露準則』的法規布局與實務實施要點。
+            這是企業永續資訊揭露歷史性的轉折點，我們將從過去「自願性、行銷取向的永續報告書」正式邁向「具有證交法約束力、必須與財務報表同等可靠並同步公告」的合規專章時代。
+            今天的簡報會涵蓋企業面臨的轉型壓力、我國金管會規定的四階段接軌時程，董事會董監事面臨的推定過失刑事與民事風險，以及 IFRS 的核心架構和首年豁免條款。`,
+            
+            2: `【Slide 2 備忘錄】
+            這是今日研討的四大核心章節大綱。
+            第一部分，我們會先了解大環境的契機與法規防範漂綠的壓力；
+            第二部分是各位董監事與專案負責人最關心的我國接軌時程以及董監事責任；
+            第三部分我們會拆解一般準則 S1 與氣候準則 S2 的四大核心構面；
+            最後一部分則是財務重大性與首年過渡豁免的彈性作法。
+            在簡報中，大家可以按鍵盤 M 鍵隨時滑出目錄來跳轉，或按 N 鍵開啟此備忘錄。`,
+            
+            3: `【Slide 3 備忘錄】
+            首先切入第一章：企業的轉型契機。
+            投影片的左側列出了全球標竿企業如何透過 ESG 轉型創造價值，例如 3M 改善製程節省 17 億美元，陶氏化學發展太陽能屋瓦產品，這代表永續已經不是單純的成本，而是新業務與利潤的來源。
+            但右側是關鍵的合規紅線：防範漂綠（Greenwashing）。
+            歐盟及我國金管會均嚴格防範漂綠，並將漂綠分為三類：空泛的氣候承諾卻無監督痕跡、虛假的環境效益宣稱，以及誤導性的風險披露。
+            特別注意一個新詞：Greenhushing（綠默）。有些公司因為害怕被指控漂綠，選擇對永續進展完全不對外說明，這在未來 IFRS 的重大性評估下也是不被允許的，因為企業有受託責任必須向投資人誠實披露。`,
+            
+            4: `【Slide 4 備忘錄】
+            第四頁我們討論「價值鏈骨牌效應」與「數據監控者」。
+            很多中小企業客戶會問：「我不是上市櫃公司，我也要管 IFRS 嗎？」答案是肯定的。
+            因為大型納管企業（例如台積電、聯電）在編製範疇三（Scope 3）排放數據時，會強制要求旗下供應商提供碳盤查資料，這就是壓力傳導。
+            同時，全球的數據聚合與評級機構（如 Morningstar、DJSI）已經使用網路爬蟲和 AI 追蹤企業所有的環保裁罰紀錄與新聞，這帶給同業極大的比較排名壓力。我們必須主動進行資料管理，提供真實且準確的背景資訊。`,
+            
+            5: `【Slide 5 備忘錄】
+            第五頁為您呈現金管會頒布的我國接軌 IFRS 永續揭露準則時程。
+            畫面上是一個時間軸，呈現四個適用階段：
+            第一階段是 2026 年，適用資本額 100 億元以上的上市公司，他們最快將在 2027 年申報。
+            第二階段是 2027 年，適用 50 億至 100 億的公司。
+            第三階段是 2028 年，適用 50 億以下的所有上市櫃公司，在 2029 年全面接軌。
+            到了第四階段，也就是 2029 年，所有人不分規模，都要落實「永續專章與財務報告同日公告申報」的規定，這對數據收集的即時性是一大挑戰。`,
+            
+            6: `【Slide 6 備忘錄】
+            這一頁我們討論導入專案的實務工項以及董事會的核心法律責任。
+            左側是我們輔導企業接軌時的四個標準導入階段：包含小組成立、Gap 差異分析、氣候風險量化財務評估，以及試編專章。
+            右側是重中之重：董事會在永續專章申報中承擔的「推定過失」法律負擔。
+            由於永續專章直接納入年報，一旦出現資訊不實或造假，董監事在民刑事上會被直接推定過失。董事們不能再以「不知情」作為免責抗辯。
+            因此，董事會召開會議時，審查導入進度必須在議事錄留存詳細的發言、討論與監督軌跡。`,
+            
+            7: `【Slide 7 備忘錄】
+            第七頁詳細說明「永續揭露不實」與證交法刑事責任的關聯。
+            依照證交法規定，年報或主要內容之虛偽不實，董監事必須負民事賠償責任，若涉嫌意圖欺騙則構成三年至十年的刑事重罪。
+            更嚴重的是環保法規與財報不實的「連動效應」。
+            檢察官與律師指出，如果公司在年報裡大肆宣揚環境合規，但實際上卻有內部違規排汙或遭處罰，這將不再只是環保局的罰單，而是直接涉嫌「年報與財報不實」，構成證交法刑事罪。這點請各公司法務與董事特別留意。`,
+            
+            8: `【Slide 8 備忘錄】
+            第三章，我們來拆解 IFRS S1 與 S2 的核心架構。
+            IFRS 的框架完全引用了 TCFD 的四大構面：
+            治理：誰來監督；策略：風險如何影響商業模式；風險管理：如何識別與整合；指標與目標：如何量化成效。
+            S1 是「一般準則」，規範所有永續風險的揭露大原則；S2 則是專注於「氣候準則」的細則，要求揭露實體風險（如風災、水災）與轉型風險（如碳費、能源轉型成本）。目前第一波接軌只要求強制揭露與氣候相關的 S2 部分。`,
+            
+            9: `【Slide 9 備忘錄】
+            第九頁探討「雙重重大性」與「合比例原則」。
+            左側的圖表清晰呈現 IFRS 與 GRI 的重大性差異：IFRS 專注在「財務重大性」，也就是氣候對公司「財務、價值」的影響，主要給投資人看；而 GRI 關注「衝擊重大性」，是公司營運對「社會、環境」的衝擊，主要給社會大眾看。
+            右側是實務上的減壓機制：合比例原則（Proportionality）。金管會理解中小型企業資源有限，因此允許企業在衡量財務影響時，採用「與現有技能資源相稱」的估算方式。首年接軌也享有「免除範疇三數據」、「免比較資訊」與「商業機密敏感免除」等豁免。`,
+            
+            10: `【Slide 10 備忘錄】
+            最後是總結與國富浩華的諮詢服務。
+            接軌 IFRS 不是一蹴可幾的，從差異分析到內控制度建置大約需要一年半的準備期。
+            國富浩華擁有跨審計、稅務與永續 Advisory 的跨國團隊，能協助企業順利度過接軌首年的試編期，將法規壓力轉化為企業競爭優勢。
+            有任何問題，歡迎與我們的窗口聯繫，謝謝大家。`
+        };
+
+        // Initialize Presenter tools
+        const timerText = document.getElementById('timer-text');
+        let timerSeconds = 0;
+        let timerInterval = null;
+
+        function startTimer() {
+            if (!timerInterval) {
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                    const secs = String(timerSeconds % 60).padStart(2, '0');
+                    timerText.textContent = `${mins}:${secs}`;
+                }, 1000);
+            }
+        }
+
+        function toggleTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                document.querySelector('.timer-dot').style.backgroundColor = '#EF4444';
+            } else {
+                startTimer();
+                document.querySelector('.timer-dot').style.backgroundColor = 'var(--color-emerald)';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerSeconds = 0;
+            timerText.textContent = "00:00";
+            document.querySelector('.timer-dot').style.backgroundColor = 'var(--color-emerald)';
+            startTimer();
+        }
+
+        // Drawer Controls
+        function toggleTOC() {
+            const toc = document.getElementById('drawer-toc');
+            toc.classList.toggle('open');
+            // Close notes if open
+            document.getElementById('drawer-notes').classList.remove('open');
+        }
+
+        function toggleNotes() {
+            const notes = document.getElementById('drawer-notes');
+            notes.classList.toggle('open');
+            // Close TOC if open
+            document.getElementById('drawer-toc').classList.remove('open');
+        }
+
+        function closeDrawers() {
+            document.getElementById('drawer-toc').classList.remove('open');
+            document.getElementById('drawer-notes').classList.remove('open');
+        }
+
+        // Theme Switcher
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Active Slide Manager
+        function goToSlide(slideNum) {
+            if (slideNum < 1 || slideNum > TOTAL_SLIDES) return;
+            
+            // Remove active from current
+            document.querySelector('.slide.active').classList.remove('active');
+            
+            // Add active to new
+            const nextSlideEl = document.querySelector(`.slide[data-slide="${slideNum}"]`);
+            nextSlideEl.classList.add('active');
+            
+            currentSlide = slideNum;
+            
+            // Update TOC links
+            document.querySelectorAll('.toc-item').forEach((item, index) => {
+                if (index + 1 === slideNum) {
+                    item.classList.add('active');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Update Speaker Notes
+            document.getElementById('notes-content').textContent = SPEAKER_NOTES[slideNum] || "無此頁講稿備忘錄。";
+            
+            // Update footer progress and counter
+            const progressFill = nextSlideEl.querySelector('.progress-fill');
+            const pageCounter = nextSlideEl.querySelector('.footer-right');
+            
+            if (progressFill) {
+                const percent = ((slideNum - 1) / (TOTAL_SLIDES - 1)) * 100;
+                progressFill.style.width = `${percent}%`;
+            }
+            if (pageCounter) {
+                pageCounter.textContent = `${String(slideNum).padStart(2, '0')} / ${String(TOTAL_SLIDES).padStart(2, '0')}`;
+            }
+
+            closeDrawers();
+        }
+
+        function nextSlide() {
+            if (currentSlide < TOTAL_SLIDES) goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) goToSlide(currentSlide - 1);
+        }
+
+        // Scaler for 16:9 widescreen layout
+        function scaleContainer() {
+            const container = document.getElementById('presentation-container');
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            const scaleX = windowWidth / varWidth();
+            const scaleY = windowHeight / varHeight();
+            
+            // Use the smaller scale factor to ensure it fits entirely in the viewport
+            const scale = Math.min(scaleX, scaleY);
+            
+            container.style.transform = `scale(${scale})`;
+            container.style.left = `${(windowWidth - varWidth() * scale) / 2}px`;
+            container.style.top = `${(windowHeight - varHeight() * scale) / 2}px`;
+            container.style.position = 'absolute';
+        }
+
+        function varWidth() { return 1920; }
+        function varHeight() { return 1080; }
+
+        // Generate TOC elements dynamically
+        function setupTOC() {
+            const list = document.getElementById('toc-list');
+            const slideElements = document.querySelectorAll('.slide');
+            
+            slideElements.forEach((slide, index) => {
+                const num = index + 1;
+                let title = `第 ${num} 頁`;
+                
+                if (num === 1) title = "封面  |  IFRS S1/S2 永續財務揭露";
+                else if (num === 2) title = "目錄  |  研討大綱與簡報路徑";
+                else {
+                    const slideTitleEl = slide.querySelector('.slide-title');
+                    if (slideTitleEl) title = `${num}. ${slideTitleEl.textContent}`;
+                }
+                
+                const li = document.createElement('li');
+                li.className = `toc-item ${num === 1 ? 'active' : ''}`;
+                li.textContent = title;
+                li.onclick = () => goToSlide(num);
+                list.appendChild(li);
+            });
+        }
+
+        // Key bindings
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+                e.preventDefault();
+            } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+                prevSlide();
+                e.preventDefault();
+            } else if (e.key === 'Home') {
+                goToSlide(1);
+                e.preventDefault();
+            } else if (e.key === 'End') {
+                goToSlide(TOTAL_SLIDES);
+                e.preventDefault();
+            } else if (e.key === 'm' || e.key === 'M') {
+                toggleTOC();
+            } else if (e.key === 'n' || e.key === 'N') {
+                toggleNotes();
+            } else if (e.key === 't' || e.key === 'T') {
+                toggleTheme();
+            }
+        });
+
+        // Initialize presentation
+        window.addEventListener('resize', scaleContainer);
+        setupTOC();
+        scaleContainer();
+        startTimer();
+        goToSlide(1);
+    </script>
+</body>
+</html>
