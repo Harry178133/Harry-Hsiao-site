@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <title>國富浩華永續顧問服務</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased" x-data="{ activeTab: 'all', modalOpen: false, modalData: {} }">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <span class="text-xl font-bold tracking-wider text-blue-900">Crowe</span>
+                    <span class="text-sm font-semibold text-slate-500 ml-2 border-l border-slate-300 pl-2">國富浩華聯合會計師事務所</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-600 hover:text-blue-900 transition">關於國富</a>
+                    <a href="#services" class="text-slate-600 hover:text-blue-900 transition">永續服務</a>
+                    <a href="#clients" class="text-slate-600 hover:text-blue-900 transition">指標客戶</a>
+                    <a href="#team" class="text-slate-600 hover:text-blue-900 transition">專業團隊</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 text-white overflow-hidden py-24 md:py-32">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 mb-6 border border-emerald-500/30">
+                    <i class="fa-solid px-1 fa-leaf"></i> 永續顧問服務簡介
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                    透過永續數據<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">提升企業競爭力</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-8 font-light">
+                    明智決策，持久價值。 國富浩華協助企業在快速變動的 ESG 法規中精準佈局，創造實質永續影響力。
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#services" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition">
+                        探索永續服務
+                    </a>
+                    <a href="#about" class="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg backdrop-blur-sm border border-white/20 transition">
+                        營運概況
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            <div class="lg:col-span-1">
+                <h2 class="text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-3">Firm Profile</h2>
+                <p class="text-3xl font-bold text-slate-900 mb-4">全球領先會計網絡</p>
+                <p class="text-slate-600 leading-relaxed font-light">
+                    國富浩華聯合會計師事務所為全球前十大會計網絡國富浩華國際 (Crowe International) 之台灣成員所。依簽證公開發行以上案件量排名，高居台灣第五大事務所。
+                </p>
+            </div>
+            <div class="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <p class="text-xs font-medium text-slate-500 mb-1">市場排名</p>
+                    <p class="text-3xl font-extrabold text-blue-900">No.5</p>
+                    <p class="text-xs text-slate-400 mt-2">公發簽證案件量</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <p class="text-xs font-medium text-slate-500 mb-1">執業會計師</p>
+                    <p class="text-3xl font-extrabold text-blue-900">43人</p>
+                    <p class="text-xs text-slate-400 mt-2">專業菁英團隊</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <p class="text-xs font-medium text-slate-500 mb-1">員工人數</p>
+                    <p class="text-3xl font-extrabold text-blue-900">約500人</p>
+                    <p class="text-xs text-slate-400 mt-2">全台服務網絡</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <p class="text-xs font-medium text-slate-500 mb-1">簽證客戶</p>
+                    <p class="text-3xl font-extrabold text-blue-900">3070+</p>
+                    <p class="text-xs text-slate-400 mt-2">含70+公發公司</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 bg-white rounded-2xl shadow-sm border border-slate-100 p-8" x-data="{ office: 'taipei' }">
+            <div class="flex flex-wrap gap-2 border-b border-slate-100 pb-4">
+                <button @click="office = 'taipei'" :class="office === 'taipei' ? 'bg-blue-900 text-white' : 'text-slate-600 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-sm font-medium transition">總所 / 台北所</button>
+                <button @click="office = 'taichung'" :class="office === 'taichung' ? 'bg-blue-900 text-white' : 'text-slate-600 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-sm font-medium transition">台中所</button>
+                <button @click="office = 'changhua'" :class="office === 'changhua' ? 'bg-blue-900 text-white' : 'text-slate-600 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-sm font-medium transition">彰化所</button>
+                <button @click="office = 'kaohsiung'" :class="office === 'kaohsiung' ? 'bg-blue-900 text-white' : 'text-slate-600 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-sm font-medium transition">高雄所</button>
+            </div>
+            <div class="mt-6 text-sm text-slate-600 space-y-2">
+                <div x-show="office === 'taipei'" x-cloak>
+                    <p class="font-semibold text-slate-900 text-base mb-1">台北總所 & 台北所</p>
+                    <p><i class="fa-solid fa-location-dot w-5 text-slate-400"></i> 台北市松山區敦化北路122號7樓及8樓</p>
+                </div>
+                <div x-show="office === 'taichung'" x-cloak>
+                    <p class="font-semibold text-slate-900 text-base mb-1">台中所</p>
+                    <p><i class="fa-solid fa-location-dot w-5 text-slate-400"></i> 台中市西區台灣大道二段285號15、19、25樓</p>
+                </div>
+                <div x-show="office === 'changhua'" x-cloak>
+                    <p class="font-semibold text-slate-900 text-base mb-1">彰化所</p>
+                    <p><i class="fa-solid fa-location-dot w-5 text-slate-400"></i> 彰化縣彰化市中山路二段681號11樓</p>
+                </div>
+                <div x-show="office === 'kaohsiung'" x-cloak>
+                    <p class="font-semibold text-slate-900 text-base mb-1">高雄所</p>
+                    <p><i class="fa-solid fa-location-dot w-5 text-slate-400"></i> 高雄市苓雅區四維三路6號27樓之1</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-slate-100 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-3">Our Services</h2>
+                <p class="text-3xl font-bold text-slate-900">永續發展顧問服務內容</p>
+                <p class="text-slate-500 mt-4 font-light">全方位的 ESG 與碳管理輔導，協助企業接軌國際揭露標準與減碳路徑。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-gavel text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">IFRS S1 S2 輔導諮詢</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">協助企業對接國際永續揭露準則，精準辨識永續相關財務風險與機會。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-invoice text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">ESG 永續報告書編製</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">重大的重大性議題辨識、問卷發放與高規格永續報告書撰寫諮詢。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-certificate text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">第三方確信服務</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">提供嚴謹的永續指標確信、外勤訪談與現場憑證抽查，提升數據公信力。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-cloud-sun-rain text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">TCFD 氣候相關財務揭露</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">輔導企業建立氣候風險治理架構，評估潛在財務衝擊並建立應對策略。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">SROI 社會投資報酬率計算</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">計算各種永續專案的影響力。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-trophy text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">永續參獎與評鑑輔導</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">協助企業參與各類永續獎項、提升公司治理評鑑與 ESG 評等表現。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-smog text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">溫室氣體盤查輔導</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">以 ISO 14064-1 準則協助辨識重大排放源，精準設算與量化溫室氣體。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-900 group-hover:text-white transition">
+                        <i class="fa-solid fa-coins text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">內部碳定價輔導</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-light">協助企業建構內部碳管理機制，透過經濟誘因驅動低碳轉型與投資決策。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-3">Our Track Record</h2>
+            <p class="text-3xl font-bold text-slate-900">永續顧問輔導指標客戶</p>
+            <p class="text-slate-500 mt-4 font-light">深耕各產業，累積豐富且多元的實務輔導經驗與實績。</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2 mb-10 border-b border-slate-200 pb-4">
+            <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">全部客戶</button>
+            <button @click="activeTab = 'bio'" :class="activeTab === 'bio' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">生技製藥 / 醫材</button>
+            <button @click="activeTab = 'public'" :class="activeTab === 'public' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">公共服務 / 院校</button>
+            <button @click="activeTab = 'hotel'" :class="activeTab === 'hotel' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">觀光餐旅</button>
+            <button @click="activeTab = 'tech'" :class="activeTab === 'tech' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">科技 / 半導體 / 製造</button>
+            <button @click="activeTab = 'traditional'" :class="activeTab === 'traditional' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">紡織 / 化工 / 零售</button>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div x-show="activeTab === 'all' || activeTab === 'bio'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-600 mb-2 block">生技製藥</span>
+                <p class="font-semibold text-slate-900 text-sm">保瑞藥業股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'bio'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-600 mb-2 block">生技製藥</span>
+                <p class="font-semibold text-slate-900 text-sm">中裕新藥股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'bio'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-600 mb-2 block">生技製藥</span>
+                <p class="font-semibold text-slate-900 text-sm">育世博生物科技</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'bio'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-600 mb-2 block">醫療用品</span>
+                <p class="font-semibold text-slate-900 text-sm">杏一醫療用品股份有限公司</p>
+            </div>
+
+            <div x-show="activeTab === 'all' || activeTab === 'public'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-600 mb-2 block">公共服務</span>
+                <p class="font-semibold text-slate-900 text-sm">台灣電力股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'public'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-600 mb-2 block">公共服務</span>
+                <p class="font-semibold text-slate-900 text-sm">中華電信股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'public'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-600 mb-2 block">大專院校</span>
+                <p class="font-semibold text-slate-900 text-sm">國立臺北大學</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'public'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-600 mb-2 block">大專院校</span>
+                <p class="font-semibold text-slate-900 text-sm">中原大學</p>
+            </div>
+
+            <div x-show="activeTab === 'all' || activeTab === 'hotel'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-amber-600 mb-2 block">觀光餐旅業</span>
+                <p class="font-semibold text-slate-900 text-sm">晶華國際酒店集團</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'hotel'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-amber-600 mb-2 block">觀光餐旅業</span>
+                <p class="font-semibold text-slate-900 text-sm">台北大直英迪格酒店</p>
+            </div>
+
+            <div x-show="activeTab === 'all' || activeTab === 'tech'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-blue-600 mb-2 block">科技與資訊</span>
+                <p class="font-semibold text-slate-900 text-sm">群暉科技股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'tech'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-blue-600 mb-2 block">硬體製造</span>
+                <p class="font-semibold text-slate-900 text-sm">瑞軒科技股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'tech'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-blue-600 mb-2 block">電子半導體</span>
+                <p class="font-semibold text-slate-900 text-sm">順德工業股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'tech'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-blue-600 mb-2 block">電機機械</span>
+                <p class="font-semibold text-slate-900 text-sm">時碩集團</p>
+            </div>
+
+            <div x-show="activeTab === 'all' || activeTab === 'traditional'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-purple-600 mb-2 block">化工業</span>
+                <p class="font-semibold text-slate-900 text-sm">花仙子企業股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'traditional'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-purple-600 mb-2 block">鋼鐵工業</span>
+                <p class="font-semibold text-slate-900 text-sm">允強實業股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'traditional'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-purple-600 mb-2 block">紡織纖維</span>
+                <p class="font-semibold text-slate-900 text-sm">合隆毛廠股份有限公司</p>
+            </div>
+            <div x-show="activeTab === 'all' || activeTab === 'traditional'" class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-purple-600 mb-2 block">居家生活</span>
+                <p class="font-semibold text-slate-900 text-sm">詩肯股份有限公司</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-20 bg-slate-900 text-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-3">Our Experts</h2>
+                <p class="text-3xl font-bold text-white">專業永續服務團隊</p>
+                <p class="text-slate-400 mt-4 font-light">跨審計、稅務與永續發展的頂尖專家，提供一站式整合諮詢服務。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center text-xl font-bold text-emerald-400"><i class="fa-solid fa-user-tie"></i></div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">王家祥 Robert Wang</h3>
+                                <p class="text-xs text-slate-400">合夥人</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 font-light line-clamp-3 mb-4">
+                            於安侯建業及國富浩華擁有超過20年經驗，專精審計、國際租稅規劃、企業併購與 IPO 輔導。
+                        </p>
+                    </div>
+                    <button @click="modalOpen = true; modalData = { 
+                        name: '王家祥 Robert Wang', 
+                        title: '合夥人', 
+                        exp: '在安侯建業及國富浩華超過20年的經驗。專業服務範圍包括審計、國際租稅規劃、企業併購重組、IPO輔導、企業價值評價等資本市場相關服務。', 
+                        edu: '國立政治大學EMBA、Gardner-Webb University 會計碩士、多倫多大學經濟學學士',
+                        cert: '台灣執業會計師、美國執業會計師'
+                    }" class="w-full py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-xs font-medium text-center transition">
+                        完整資歷介紹
+                    </button>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center text-xl font-bold text-emerald-400"><i class="fa-solid fa-user-tie"></i></div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">蕭又文 Austin Hsiao</h3>
+                                <p class="text-xs text-slate-400">合夥人</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 font-light line-clamp-3 mb-4">
+                            擁有約18年專業會計師經驗，熟悉台灣會計準則及國際財務報告準則，服務對象涵蓋多家大型上市櫃集團。
+                        </p>
+                    </div>
+                    <button @click="modalOpen = true; modalData = { 
+                        name: '蕭又文 Austin Hsiao', 
+                        title: '合夥人', 
+                        exp: '於安侯建業及國富浩華服務共約18年經驗。專業範圍包括審計、國際租稅規劃、財務盡職調查、併購投資規劃、IPO輔導等。曾主導廣達電腦集團、英業達集團、萬海航運集團、奇美實業集團等審計簽證服務。', 
+                        edu: '國立台灣大學會計學士',
+                        cert: '中華民國會計師'
+                    }" class="w-full py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-xs font-medium text-center transition">
+                        完整資歷介紹
+                    </button>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center text-xl font-bold text-emerald-400"><i class="fa-solid fa-user-gear"></i></div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">蕭聖霖 Harry Hsiao</h3>
+                                <p class="text-xs text-slate-400">經理</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 font-light line-clamp-3 mb-4">
+                            專責永續報告書確信與輔導、溫室氣體盤查輔導（ISO 14064-1）、社會投資報酬率 (SROI) 設算與移轉訂價規劃。
+                        </p>
+                    </div>
+                    <button @click="modalOpen = true; modalData = { 
+                        name: '蕭聖霖 Harry Hsiao', 
+                        title: '永續發展服務部 經理', 
+                        exp: '專責永續報告書輔導編製與重大議題辨識；以 ISO 14064-1 規範協助企業辨識溫室氣體排放源並實際計算碳排量；主導社會投資報酬率 (SROI) 之利害關係人訪談、成果事件鏈繪製與最終價值設算。代表客戶包括遠傳電信、寒舍、日月光投控、可寧衛等。並具備集團移轉訂價規劃等豐富稅局查核專案回覆經驗。', 
+                        edu: '國立中山大學財務管理學士',
+                        cert: '永續發展與稅務專案經理、GRI / 溫室氣體專業受訓認證'
+                    }" class="w-full py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-xs font-medium text-center transition">
+                        完整資歷介紹
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-white font-bold tracking-wider text-base">Crowe Taiwan</p>
+                <p class="text-xs mt-1">國富浩華聯合會計師事務所</p>
+                <p class="text-[11px] text-slate-500 mt-2">©2026 Crowe Taiwan. All Rights Reserved.</p>
+            </div>
+            <div class="text-center md:text-right text-xs space-y-1">
+                <p class="text-slate-300 font-medium">總所聯絡資訊</p>
+                <p><i class="fa-solid fa-phone px-1 text-slate-600"></i> +886 2 8770 5181</p>
+                <p><i class="fa-solid fa-envelope px-1 text-slate-600"></i> harry.hsiao@crowe.tw</p>
+                <p><i class="fa-solid fa-map-pin px-1 text-slate-600"></i> 台北市松山區敦化北路122號7樓</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed inset-0 z-50 overflow-y-auto" x-show="modalOpen" x-cloak>
+        <div class="fixed inset-0 bg-black/60 transition-opacity" @click="modalOpen = false"></div>
+
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div class="relative bg-white text-slate-800 max-w-2xl w-full rounded-2xl shadow-xl border border-slate-200 overflow-hidden transform transition-all p-6 md:p-8" @click.stop>
+                <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-900" x-text="modalData.name"></h3>
+                        <p class="text-xs font-medium text-slate-500 mt-1" x-text="modalData.title"></p>
+                    </div>
+                    <button @click="modalOpen = false" class="text-slate-400 hover:text-slate-600 transition">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-emerald-600 mb-1">專業執業經驗</h4>
+                        <p class="text-slate-600 font-light" x-text="modalData.exp"></p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-emerald-600 mb-1">專業證照</h4>
+                        <p class="text-slate-600 font-light" x-text="modalData.cert"></p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-emerald-600 mb-1">學歷程度</h4>
+                        <p class="text-slate-600 font-light" x-text="modalData.edu"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
