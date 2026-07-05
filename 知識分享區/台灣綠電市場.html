@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣綠電市場洞察簡報｜國富浩華 Crowe (TW)</title>
+<style>
+  :root{
+    --indigo:#011E41;
+    --indigo-soft:#0A3A6B;
+    --amber:#F5A800;
+    --blue:#0075C9;
+    --lightblue:#54C0E8;
+    --teal:#00A98F;
+    --green:#76BC21;
+    --gray-900:#1A1A1A;
+    --gray-600:#666666;
+    --gray-300:#CCCCCC;
+    --gray-100:#F5F6F8;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--gray-900);
+    color:var(--gray-900);
+    overflow:hidden;
+  }
+  .deck{
+    position:relative;
+    width:100vw;
+    height:100vh;
+  }
+  .slide{
+    position:absolute;
+    inset:0;
+    display:none;
+    flex-direction:column;
+    background:var(--white);
+    padding:56px 88px 88px;
+    opacity:0;
+    transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1;}
+  .slide.dark{background:var(--indigo); color:var(--white);}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;
+    font-size:14px;letter-spacing:2px;font-weight:700;
+    color:var(--amber); text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";width:28px;height:3px;background:var(--amber);display:inline-block;
+  }
+  h1{ font-size:clamp(30px,4vw,50px); line-height:1.25; margin:0 0 18px; color:var(--indigo); font-weight:800;}
+  .dark h1{color:var(--white);}
+  h2{ font-size:clamp(22px,2.6vw,30px); color:var(--indigo); margin:0 0 6px; font-weight:800;}
+  .subtitle{ font-size:clamp(15px,1.4vw,19px); color:var(--gray-600); line-height:1.7; max-width:900px;}
+  .dark .subtitle{color:#C9D6E5;}
+
+  .content{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:20px; min-height:0;}
+
+  /* header/footer chrome */
+  .topbar{
+    position:absolute; top:28px; left:88px; right:88px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; color:var(--gray-600); letter-spacing:1px;
+  }
+  .dark .topbar{color:#9FB3CC;}
+  .brand-mark{ display:flex; align-items:center; gap:8px; font-weight:800; color:var(--indigo); }
+  .dark .brand-mark{color:var(--white);}
+  .brand-mark .tick{ width:10px;height:10px; background:var(--amber); border-radius:2px; transform:rotate(45deg);}
+  .brand-mark img{height:22px; display:block;}
+  .brand-mark span{font-size:15px;}
+
+  .footer{
+    position:absolute; bottom:28px; left:88px; right:88px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; color:var(--gray-300);
+  }
+  .dark .footer{color:#5C7699;}
+  .page-num{font-weight:700; color:var(--gray-600);}
+  .dark .page-num{color:#C9D6E5;}
+
+  /* cards */
+  .card-grid{ display:grid; gap:22px; }
+  .cols-2{ grid-template-columns:1fr 1fr; }
+  .card{
+    background:var(--gray-100); border-radius:14px; padding:26px 28px;
+    border-left:5px solid var(--amber);
+  }
+  .card h3{ margin:0 0 10px; font-size:19px; color:var(--indigo); font-weight:800;}
+  .card p{ margin:0; font-size:15.5px; line-height:1.75; color:#3A3A3A;}
+  .card .tagset{ margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{ font-size:12px; font-weight:700; padding:4px 10px; border-radius:999px; background:#E7ECF3; color:var(--indigo);}
+
+  /* stat blocks */
+  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .stat-box{ background:var(--gray-100); border-radius:14px; padding:20px 22px;}
+  .stat-box .big{ font-size:34px; font-weight:800; color:var(--indigo); }
+  .stat-box .big small{ font-size:16px; font-weight:700; color:var(--amber); }
+  .stat-box .label{ font-size:13px; color:var(--gray-600); margin-top:6px; line-height:1.5;}
+
+  /* compare bars */
+  .bar-row{ margin-bottom:16px; }
+  .bar-row .bar-label{ display:flex; justify-content:space-between; font-size:14.5px; font-weight:700; color:var(--indigo); margin-bottom:6px;}
+  .bar-track{ position:relative; height:14px; background:#E7ECF3; border-radius:7px; overflow:hidden;}
+  .bar-fill{ position:absolute; top:0; left:0; height:100%; border-radius:7px; }
+  .bar-legend{ display:flex; gap:16px; font-size:12px; color:var(--gray-600); margin-top:6px;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle;}
+
+  table.data-table{ width:100%; border-collapse:collapse; font-size:14.5px; }
+  table.data-table th{ text-align:left; color:var(--gray-600); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.5px; padding:8px 10px; border-bottom:2px solid var(--indigo);}
+  table.data-table td{ padding:10px 10px; border-bottom:1px solid #E7ECF3; color:#2B2B2B;}
+  table.data-table tr:first-child td{ font-weight:800; color:var(--indigo); }
+
+  .action-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px 26px; }
+  .action-item{ display:flex; gap:14px; align-items:flex-start; }
+  .action-num{ flex:none; width:34px;height:34px;border-radius:50%; background:var(--indigo); color:var(--amber); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .action-item h4{ margin:0 0 4px; font-size:15.5px; color:var(--indigo);}
+  .action-item p{ margin:0; font-size:13.8px; line-height:1.6; color:#3A3A3A;}
+
+  /* title slide */
+  .title-slide{ justify-content:center; align-items:flex-start; }
+  .title-slide .logo-big{ margin-bottom:34px; }
+  .title-slide .logo-big img{height:46px;}
+  .meta-row{ display:flex; gap:28px; margin-top:34px; font-size:14px; color:#B9C8DA;}
+  .meta-row div{ padding-left:14px; border-left:2px solid var(--amber);}
+  .meta-row b{ display:block; color:var(--white); font-size:15px; }
+
+  /* agenda slide */
+  .agenda-list{ display:flex; flex-direction:column; gap:18px; margin-top:10px;}
+  .agenda-item{ display:flex; align-items:center; gap:22px; padding:18px 22px; background:var(--gray-100); border-radius:12px;}
+  .agenda-idx{ font-size:34px; font-weight:800; color:var(--amber); width:60px;}
+  .agenda-item h3{ margin:0 0 4px; color:var(--indigo); font-size:19px;}
+  .agenda-item p{ margin:0; color:var(--gray-600); font-size:14.5px;}
+
+  /* closing */
+  .closing-box{ margin-top:26px; padding:26px 30px; background:rgba(255,255,255,.06); border-radius:14px; border:1px solid rgba(255,255,255,.15); max-width:820px;}
+  .closing-box p{ font-size:15.5px; line-height:1.8; color:#DCE6F2; margin:0;}
+
+  /* nav controls */
+  .nav{
+    position:fixed; bottom:26px; right:88px; display:flex; align-items:center; gap:14px; z-index:50;
+  }
+  .nav button{
+    width:42px;height:42px;border-radius:50%; border:1.5px solid var(--gray-300); background:var(--white);
+    color:var(--indigo); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:all .15s ease;
+  }
+  .nav button:hover{ background:var(--indigo); color:var(--white); border-color:var(--indigo); }
+  .slide.dark ~ .nav button, body.on-dark .nav button{ }
+  .dots{ position:fixed; bottom:38px; left:88px; display:flex; gap:8px; z-index:50; }
+  .dots span{ width:8px;height:8px;border-radius:50%; background:var(--gray-300); cursor:pointer; transition:.2s;}
+  .dots span.active{ background:var(--amber); width:22px; border-radius:5px;}
+
+  @media print{
+    .nav,.dots{display:none;}
+    .slide{ position:relative; display:flex !important; opacity:1 !important; page-break-after:always; height:100vh;}
+    body{overflow:visible;}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 : TITLE -->
+  <section class="slide dark active title-slide">
+    <div class="topbar">
+      <div class="brand-mark"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Crowe_Logo.png" alt="Crowe" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'"><span style="display:none;color:#fff"><span class="tick"></span>Crowe</span></div>
+      <div>ESG ADVISORY BRIEFING</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Crowe (TW) CPAs · ESG 顧問簡報</div>
+      <h1>台灣綠電市場<br>洞察簡報</h1>
+      <p class="subtitle">解讀資策會《台灣綠電市場手冊》，聚焦企業綠電採購的核心洞見、關鍵數據與可執行的行動建議。</p>
+      <div class="meta-row">
+        <div><b>資策會科技法律研究所</b>資料來源</div>
+        <div><b>2026年6月版・共119頁</b>原始報告</div>
+        <div><b>國富浩華聯合會計師事務所</b>簡報製作</div>
+      </div>
+    </div>
+    <div class="footer"><span>Crowe (TW) CPAs</span><span class="page-num">01 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 2 : AGENDA -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>台灣綠電市場洞察簡報</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Agenda</div>
+      <h1>簡報架構</h1>
+      <div class="agenda-list">
+        <div class="agenda-item">
+          <div class="agenda-idx">01</div>
+          <div><h3>核心洞見</h3><p>綠電從自願走向合規必要、台灣市場「有交易、無市場」的現況、供給瓶頸與售電業平台化趨勢</p></div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-idx">02</div>
+          <div><h3>數據洞察</h3><p>發電結構轉型、再生能源成長軌跡、台電商品化機制與交易市場規模</p></div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-idx">03</div>
+          <div><h3>行動摘要</h3><p>給客戶的六項具體綠電採購與合規因應建議</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：資策會《台灣綠電市場手冊》</span><span class="page-num">02 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 3 : CORE INSIGHT 1-2 -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>一、核心洞見</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Core Insights · 1 / 2</div>
+      <h1>從自願到合規，從議約到制度化</h1>
+      <div class="card-grid cols-2">
+        <div class="card">
+          <h3>綠電已從自願性ESG加分項，轉為合規必要項</h3>
+          <p>CBAM（2027年正式課徵碳稅）、SBTi對Scope 2的明確要求、IFRS S2揭露準則，加上品牌方要求供應商100%使用再生能源，使綠電成為訂單與供應鏈資格門檻。國內則有《氣候變遷因應法》2050淨零目標、用電大戶條款、2026年碳費開徵，以及證交所ESG評鑑全面上路。</p>
+          <div class="tagset"><span class="tag">CBAM</span><span class="tag">SBTi</span><span class="tag">IFRS S2</span><span class="tag">Scope 2</span><span class="tag">ESG評鑑</span></div>
+        </div>
+        <div class="card">
+          <h3>台灣綠電市場仍處於「有交易、無市場」階段</h3>
+          <p>現行交易以長期議約為主（CPPA、售電業轉供），缺乏公開透明、即時反映供需的撮合機制，價格訊號仰賴台電小額綠電標售價作為定錨。制度採「電證合一」原則，2025年上路的彈性分配試行計畫首次導入15分鐘級動態分配。</p>
+          <div class="tagset"><span class="tag">CPPA</span><span class="tag">電證合一</span><span class="tag">彈性分配試行計畫</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：資策會《台灣綠電市場手冊》</span><span class="page-num">03 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 4 : CORE INSIGHT 3-4 -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>一、核心洞見</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Core Insights · 2 / 2</div>
+      <h1>供給瓶頸浮現，售電業角色升級</h1>
+      <div class="card-grid cols-2">
+        <div class="card">
+          <h3>供給結構性偏向太陽光電，離岸風電缺口為關鍵瓶頸</h3>
+          <p>再生能源裝置容量中太陽光電占比已達67.7%（2025）；半導體等高用電產業（台積電曾佔全國約6.4%用電）面臨「淨零壓力」與「綠電缺口」並存。大型離岸風電案場多已被特定大廠簽購完畢，中小企業更難取得穩定來源。台灣智慧電能以「統購＋分銷」拆分CPPA降低門檻。</p>
+          <div class="tagset"><span class="tag">離岸風電</span><span class="tag">台智電</span><span class="tag">統購＋分銷</span></div>
+        </div>
+        <div class="card">
+          <h3>售電業從「電力轉供」升級為「能源服務平台」</h3>
+          <p>天能綠電、富威電力、星星電力、大同智能等業者已將綠電信託、AI用電預測、儲能／VPP整合、ESCO節能診斷、碳權與碳盤查服務納入業務範疇，反映公司（尤其中小企業）需要的不只是電，而是完整的能源配置與履約保障方案。</p>
+          <div class="tagset"><span class="tag">綠電信託</span><span class="tag">VPP</span><span class="tag">ESCO</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：資策會《台灣綠電市場手冊》</span><span class="page-num">04 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 5 : DATA - GENERATION MIX -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>二、數據洞察</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Data Insights · 1 / 4</div>
+      <h1>發電結構轉型</h1>
+      <div class="stat-grid" style="margin-bottom:6px;">
+        <div class="stat-box"><div class="big">2,641 <small>→ 2,889億度</small></div><div class="label">總發電量　2016 → 2025</div></div>
+        <div class="stat-box"><div class="big">0%</div><div class="label">核能占比　2026年降至0%</div></div>
+        <div class="stat-box"><div class="big">47.8%</div><div class="label">燃氣占比　2025，已取代燃煤成為主要基載</div></div>
+      </div>
+      <div>
+        <div class="bar-row">
+          <div class="bar-label"><span>燃煤占比</span><span>45.9% → 35.4%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:45.9%;background:var(--gray-300)"></div><div class="bar-fill" style="width:35.4%;background:var(--indigo)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>燃氣占比</span><span>31.5% → 47.8%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:31.5%;background:var(--gray-300)"></div><div class="bar-fill" style="width:47.8%;background:var(--blue)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>核能占比</span><span>12.0% → 1.1% → 0%（2026）</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:12.0%;background:var(--gray-300)"></div><div class="bar-fill" style="width:1.1%;background:var(--amber)"></div></div>
+        </div>
+        <div class="bar-legend"><span><span class="dot" style="background:var(--gray-300)"></span>2016</span><span><span class="dot" style="background:var(--indigo)"></span>2025 燃煤／燃氣／核能（同色系代表對應項目）</span></div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：經濟部能源署</span><span class="page-num">05 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 6 : DATA - RENEWABLE GROWTH -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>二、數據洞察</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Data Insights · 2 / 4</div>
+      <h1>再生能源成長軌跡</h1>
+      <div class="stat-grid" style="margin-bottom:6px;">
+        <div class="stat-box"><div class="big">4.8% <small>→ 13.1%</small></div><div class="label">再生能源發電占比　2016 → 2025</div></div>
+        <div class="stat-box"><div class="big">127 <small>→ 378億度</small></div><div class="label">再生能源發電量　成長逾1倍</div></div>
+        <div class="stat-box"><div class="big">4.7 <small>→ 22.9 GW</small></div><div class="label">再生能源裝置容量　2016 → 2025</div></div>
+      </div>
+      <div>
+        <div class="bar-row">
+          <div class="bar-label"><span>太陽光電（發電占比）</span><span>8.7% → 42.2%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:8.7%;background:var(--gray-300)"></div><div class="bar-fill" style="width:42.2%;background:var(--amber)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>風力（發電占比）</span><span>11.4% → 32.3%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:11.4%;background:var(--gray-300)"></div><div class="bar-fill" style="width:32.3%;background:var(--blue)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>裝置容量中太陽光電占比</span><span>26.3% → 67.7%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:26.3%;background:var(--gray-300)"></div><div class="bar-fill" style="width:67.7%;background:var(--teal)"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：經濟部能源署</span><span class="page-num">06 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 7 : DATA - TAIPOWER PRODUCTS -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>二、數據洞察</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Data Insights · 3 / 4</div>
+      <h1>台電商品化機制：小額綠電與RE30</h1>
+      <div class="card-grid cols-2">
+        <div class="card">
+          <h3>躉購（FIT）＋小額綠電</h3>
+          <p>躉購綠電系統計63,564件，合計裝置容量17.05 GW（截至2024年12月）。小額綠電成交電量由2023年約500萬度（4.9～6元/度）成長至2024年約900萬度（5.4～6.8元/度），71家企業得標。</p>
+        </div>
+        <div class="card">
+          <h3>RE30 低碳電力（2025年6月上市）</h3>
+          <p>釋出5億度自建綠電＋16.6億度市電，全年已完售。補充綠電價格為6.1元/度（早鳥）～6.3元/度（一般），加計稅費後實際約6.7～6.9元/度，協助出口導向企業銜接國際供應鏈減碳要求。</p>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="big">500 <small>→ 900萬度</small></div><div class="label">小額綠電成交量　2023 → 2024</div></div>
+        <div class="stat-box"><div class="big">4.9–6.8</div><div class="label">元/度　小額綠電成交價格區間（市場定錨價）</div></div>
+        <div class="stat-box"><div class="big">100%</div><div class="label">RE30當年度自建案場5億度綠電完銷率</div></div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：台電公司、資策會彙整</span><span class="page-num">07 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 8 : DATA - MARKET SCALE & RANKING -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>二、數據洞察</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Data Insights · 4 / 4</div>
+      <h1>交易規模與售電業市場地位</h1>
+      <div class="stat-grid" style="margin-bottom:14px;">
+        <div class="stat-box"><div class="big">95%+</div><div class="label">CPPA與民營售電業轉供　佔2024年市場交易量（不含躉購）</div></div>
+        <div class="stat-box"><div class="big">24.9 <small>億度</small></div><div class="label">2024年直轉供量　較2023年17.3億度成長逾四成</div></div>
+        <div class="stat-box"><div class="big">550 <small>億度</small></div><div class="label">政府估2026年再生能源供給　搭配20%/30%占比目標</div></div>
+      </div>
+      <table class="data-table">
+        <tr><th>排名</th><th>售電業</th><th>2025年直轉供憑證張數</th><th>備註</th></tr>
+        <tr><td>1</td><td>天能綠電</td><td>184,541 張</td><td>全數為太陽能</td></tr>
+        <tr><td>2</td><td>富威電力</td><td>150,990 張</td><td>2024年憑證交易量全台第一，NVIDIA在台唯一指定供應商</td></tr>
+        <tr><td>3</td><td>台汽電綠能</td><td>132,747 張</td><td>唯一同時具太陽能／水力／風力三種來源</td></tr>
+      </table>
+    </div>
+    <div class="footer"><span>資料來源：POXA ENERGY、PwC、EY，資策會彙整</span><span class="page-num">08 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 9 : ACTION SUMMARY -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand-mark"><span class="tick" style="background:var(--amber)"></span><span>Crowe (TW) CPAs</span></div>
+      <div>三、行動摘要</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Action Summary</div>
+      <h1>給客戶的六項行動建議</h1>
+      <div class="action-grid">
+        <div class="action-item"><div class="action-num">1</div><div><h4>先盤點、再選工具</h4><p>依用電規模與範疇二排放缺口決定路徑：大戶（5,000瓩以上）優先評估CPPA／案場直供；中小型企業用小額綠電、轉供或電證分離。</p></div></div>
+        <div class="action-item"><div class="action-num">2</div><div><h4>及早因應法規期程</h4><p>2026年碳費開徵（300元/噸CO2e起）與證交所ESG評鑑上路，應與碳盤查、SBTi目標設定同步規劃。</p></div></div>
+        <div class="action-item"><div class="action-num">3</div><div><h4>善用價格定錨</h4><p>以小額綠電標售價（4.9～6.8元/度）與RE30定價（6.1～6.9元/度）作為議約時的合理價格參考。</p></div></div>
+        <div class="action-item"><div class="action-num">4</div><div><h4>重視履約保障機制</h4><p>搭配綠電信託降低CPPA長約的金流與違約風險，對缺乏採購經驗的中小型公司尤為關鍵。</p></div></div>
+        <div class="action-item"><div class="action-num">5</div><div><h4>關注供給瓶頸與替代管道</h4><p>高用電產業應提前布局，離岸風電案場多已簽購完畢；可評估台智電等統購分銷平台。</p></div></div>
+        <div class="action-item"><div class="action-num">6</div><div><h4>追蹤制度化進展</h4><p>彈性分配試行計畫、撮合平台與電證市場化方向，應列入年度能源策略檢視項目。</p></div></div>
+      </div>
+    </div>
+    <div class="footer"><span>資料來源：資策會《台灣綠電市場手冊》，Crowe (TW) 整理</span><span class="page-num">09 / 10</span></div>
+  </section>
+
+  <!-- SLIDE 10 : CLOSING -->
+  <section class="slide dark">
+    <div class="topbar">
+      <div class="brand-mark"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Crowe_Logo.png" alt="Crowe" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'"><span style="display:none;color:#fff"><span class="tick"></span>Crowe</span></div>
+      <div>THANK YOU</div>
+    </div>
+    <div class="content">
+      <div class="eyebrow">Closing</div>
+      <h1>能源轉型，是制度理解與長期規劃的競賽</h1>
+      <p class="subtitle">綠電已從自願性選項轉為合規必要，市場正從議約走向制度化。及早盤點用電結構、掌握價格定錨、強化履約保障，是企業因應淨零轉型的關鍵起手式。</p>
+      <div class="closing-box">
+        <p>國富浩華 ESG顧問服務團隊可協助貴公司完成用電結構盤點、綠電採購路徑規劃、契約與履約風險評估，並同步對接碳盤查與國際供應鏈揭露要求。歡迎進一步交流討論。</p>
+      </div>
+    </div>
+    <div class="footer"><span>國富浩華聯合會計師事務所 · Crowe (TW) CPAs</span><span class="page-num">10 / 10</span></div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="nav">
+  <button id="prevBtn" aria-label="上一頁">&#8592;</button>
+  <button id="nextBtn" aria-label="下一頁">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('dots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = dotsWrap.querySelectorAll('span');
+
+  function render(){
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+  function go(i){
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    render();
+  }
+  document.getElementById('prevBtn').addEventListener('click', () => go(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => go(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') go(current + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(current - 1);
+  });
+
+  let touchX = null;
+  document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (dx > 60) go(current - 1);
+    if (dx < -60) go(current + 1);
+    touchX = null;
+  });
+
+  render();
+</script>
+</body>
+</html>

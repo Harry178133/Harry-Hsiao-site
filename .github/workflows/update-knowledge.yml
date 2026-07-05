@@ -1,0 +1,43 @@
+name: Auto Update Knowledge Hub
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '知識分享區/**'
+      - '!知識分享區/knowledge-data.js'
+
+jobs:
+  update-knowledge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Run update script
+      run: node update_knowledge.js
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # 檢查是否有變更
+        if git status --porcelain | grep -q "知識分享區/knowledge-data.js"; then
+          echo "Detect changes in knowledge-data.js, committing..."
+          git add 知識分享區/knowledge-data.js
+          git commit -m "auto: update knowledge hub index data"
+          git push
+        else
+          echo "No changes detected in knowledge-data.js."
+        fi
