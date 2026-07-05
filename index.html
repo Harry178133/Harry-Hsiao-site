@@ -96,9 +96,9 @@
     <!-- 導航列 -->
     <nav class="fixed top-0 w-full z-50 gogoro-nav transition-all duration-300">
         <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-white text-lg font-bold tracking-tight flex items-center gap-2">
-                <span>蕭聖霖 Harry Hsiao</span>
-                <span class="text-xs bg-gogoro-green/20 text-gogoro-green px-2 py-0.5 rounded font-normal">Crowe TW 經理</span>
+            <a href="#" class="text-white text-base sm:text-lg font-bold tracking-tight flex items-center gap-1.5 sm:gap-2">
+                <span>蕭聖霖<span class="hidden sm:inline"> Harry Hsiao</span></span>
+                <span class="text-[10px] sm:text-xs bg-gogoro-green/20 text-gogoro-green px-1.5 sm:px-2 py-0.5 rounded font-normal">Crowe TW 經理</span>
             </a>
             <div class="hidden md:flex space-x-10 text-[13px] font-medium text-gray-400">
                 <a href="#about" class="hover:text-white transition-colors duration-200">關於我</a>
@@ -107,9 +107,14 @@
                 <a href="#education" class="hover:text-white transition-colors duration-200">學歷 & 聯絡</a>
                 <a href="crowe.html" target="_blank" class="text-gogoro-green hover:text-[#02b399] font-semibold transition-colors duration-200">永續顧問服務</a>
             </div>
-            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="bg-gogoro-green text-gogoro-black hover:bg-[#02b399] btn-pill !py-2 !px-4 text-xs font-semibold">
-                聯絡顧問
-            </button>
+            <div class="flex items-center gap-2">
+                <a href="crowe.html" target="_blank" class="bg-white/10 text-white border border-white/20 hover:bg-white/20 btn-pill !py-2 !px-3 text-xs font-semibold transition-all">
+                    永續服務
+                </a>
+                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="bg-gogoro-green text-gogoro-black hover:bg-[#02b399] btn-pill !py-2 !px-3 text-xs font-semibold">
+                    聯絡顧問
+                </button>
+            </div>
         </div>
     </nav>
 
